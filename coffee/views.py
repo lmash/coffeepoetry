@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -11,6 +12,11 @@ from .models import CoffeeShop, User
 class HomeView(ListView):
     model = CoffeeShop
     template_name = "coffee/index.html"
+
+
+@login_required
+def create_coffee_shop(request):
+    return render(request, "coffee/create.html")
 
 
 def login_view(request):
@@ -46,6 +52,7 @@ def register(request):
         # Ensure password matches confirmation
         password = request.POST["password"]
         confirmation = request.POST["confirmation"]
+
         if password != confirmation:
             return render(request, "coffee/register.html", {
                 "message": "Passwords must match."

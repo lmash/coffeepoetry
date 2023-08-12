@@ -1,9 +1,14 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils.text import slugify
 
 
 class User(AbstractUser):
-    pass
+    slug = models.SlugField(null=False, unique=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.username)
+        super(User, self).save(*args, **kwargs)
 
 
 class CoffeeShop(models.Model):

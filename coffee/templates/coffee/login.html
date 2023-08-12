@@ -1,11 +1,11 @@
 {% extends "coffee/layout.html" %}
 
 {% block body %}
-
+<div id="login-view" class="container-fluid">
     <h2>Login</h2>
 
     {% if message %}
-        <div>{{ message }}</div>
+    <div class="alert alert-danger" role="alert">{{ message }}</div>
     {% endif %}
 
     <form action="{% url 'login' %}" method="post">
@@ -19,6 +19,7 @@
         <input class="btn btn-primary" type="submit" value="Login">
     </form>
 
+    <br>
     Don't have an account? <a href="{% url 'register' %}">Register here.</a>
-
+</div>
 {% endblock %}
