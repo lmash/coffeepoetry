@@ -1,33 +1,44 @@
 {% extends "coffee/layout.html" %}
+{% load static %}
 
 {% block body %}
-<div id="register-view" class="container-fluid">
-    <h2>Register</h2>
+<div id="register-view" class="container-fluid login-container">
+    <div class="flex-item">
+        <h2>Register</h2>
 
-    {% if message %}
-    <div class="alert alert-danger" role="alert">{{ message }}</div>
-    {% endif %}
+        {% if message %}
+        <div class="alert alert-danger" role="alert">{{ message }}</div>
+        {% endif %}
 
-    <form action="{% url 'register' %}" method="post">
-        {% csrf_token %}
-        <div class="form-group">
-            <input class="form-control" autofocus type="text" name="username" placeholder="Username" required>
-        </div>
-        <div class="form-group">
-            <input class="form-control" type="email" name="email" placeholder="Email Address">
-        </div>
-        <div class="form-group">
-            <input class="form-control" type="password" name="password" placeholder="Password" required>
-        </div>
-        <div class="form-group">
-            <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password" required>
-        </div>
-        <input class="btn btn-primary" type="submit" value="Register">
-    </form>
+        <form class="needs-validation" action="{% url 'register' %}" method="post" novalidate>
+            {% csrf_token %}
+            <div class="form-group mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input class="form-control" autofocus type="text" name="username" id="username" required>
+                <div class="invalid-feedback">Please enter a username</div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="email_address" class="form-label">Email Address</label>
+                <input class="form-control" type="email" name="email" id="email_address" required>
+                <div class="invalid-feedback">Please enter an email address</div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input class="form-control" type="password" name="password" id="password" required>
+                <div class="invalid-feedback">Please enter a password</div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="confirm_password" class="form-label">Confirm Password</label>
+                <input class="form-control" type="password" name="confirmation" id="confirm_password" required>
+                <div class="invalid-feedback">Please re-enter password</div>
+            </div>
+            <input class="btn btn-dark" type="submit" value="Register">
+        </form>
 
-    <br>
-    Already have an account? <a href="{% url 'login' %}">Log In here.</a>
+        <br>
+        Already have an account? <a href="{% url 'login' %}">Log In here.</a>
+    </div>
 
 </div>
-
+<script src="{% static 'coffee/validation.js' %}"></script>
 {% endblock %}
