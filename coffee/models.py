@@ -11,14 +11,12 @@ class User(AbstractUser):
         super(User, self).save(*args, **kwargs)
 
 
-class CoffeeShop(models.Model):
+class Cafe(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='creator')
     name = models.TextField(max_length=250)
     description = models.TextField()
-    image_1 = models.TextField(max_length=250, null=True)
-    image_2 = models.TextField(max_length=250, null=True)
-    image_3 = models.TextField(max_length=250, null=True)
     rating = models.DecimalField(null=True, decimal_places=2, max_digits=3)
+    location = models.TextField(max_length=250)
 
     def __str__(self):
         return f"{self.name} {self.creator}"
@@ -32,11 +30,16 @@ class CoffeeShop(models.Model):
             "name": self.name,
             "creator": self.creator,
             "description": self.description,
-            "image_1": self.image_1,
-            "image_2": self.image_2,
-            "image_3": self.image_3,
             "rating": self.rating
         }
+
+
+class Image(models.Model):
+    cafe = models.ForeignKey(Cafe, on_delete=models.CASCADE)
+    path = models.TextField(max_length=500)
+
+    def __str__(self):
+        return f"{self.cafe} {self.path}"
 
 
 class Review(models.Model):
@@ -48,7 +51,7 @@ class Review(models.Model):
         FIVE_BEANS = 5
 
     reviewer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviewer')
-    coffee_shop = models.ForeignKey(CoffeeShop, on_delete=models.CASCADE)
+    cafe = models.ForeignKey(Cafe, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     quality = models.IntegerField(choices=Rating.choices)
     latte_art = models.IntegerField(choices=Rating.choices)
@@ -58,13 +61,13 @@ class Review(models.Model):
     score = models.DecimalField(decimal_places=2, max_digits=3)
 
     def __str__(self):
-        return f"{self.reviewer} {self.coffee_shop} {self.created_at}"
+        return f"{self.reviewer} {self.cafe} {self.created_at}"
 
     def serialize(self):
         return {
             "id": self.id,
             "reviewer": self.reviewer,
-            "coffee_shop": self.coffee_shop,
+            "cafe": self.cafe,
             "created_at": self.created_at,
             "quality": self.quality,
             "latte_art": self.latte_art,
@@ -75,12 +78,12 @@ class Review(models.Model):
 
 
 class Adjective(models.Model):
-    coffee_shop = models.ForeignKey(CoffeeShop, on_delete=models.CASCADE)
+    cafe = models.ForeignKey(Cafe, on_delete=models.CASCADE)
     created_at = models.DateField(auto_now_add=True)
     adjective = models.TextField(max_length=50)
 
 
 class Poem(models.Model):
-    coffee_shop = models.ForeignKey(CoffeeShop, on_delete=models.CASCADE)
+    cafe = models.ForeignKey(Cafe, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     haiku = models.TextField()

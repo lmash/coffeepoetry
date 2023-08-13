@@ -6,11 +6,11 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import ListView
 
-from .models import CoffeeShop, User
+from .models import Cafe, User
 
 
 class HomeView(ListView):
-    model = CoffeeShop
+    model = Cafe
     template_name = "coffee/index.html"
 
 
