@@ -15,8 +15,13 @@ class HomeView(ListView):
 
 
 @login_required
-def create_coffee_shop(request):
-    return render(request, "coffee/create.html")
+def cafe_view(request):
+    return render(request, "coffee/cafe.html")
+
+
+@login_required
+def new_cafe(request, cafe_id):
+    return render(request, "coffee/new.html")
 
 
 def login_view(request):

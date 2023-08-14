@@ -10,7 +10,7 @@
         <div class="alert alert-danger" role="alert">{{ message }}</div>
         {% endif %}
 
-        <form class="needs-validation" action="{% url 'create' %}" method="post" novalidate>
+        <form class="needs-validation" action="{% url 'new' %}" method="post" novalidate>
             {% csrf_token %}
             <div class="form-group mb-3">
                 <label for="name" class="form-label">Name</label>
@@ -18,11 +18,15 @@
                 <div class="invalid-feedback">Please enter a café name</div>
             </div>
             <div class="form-group mb-3">
+                <label for="location" class="form-label">Location</label>
+                <input class="form-control" autofocus type="text" name="location" id="location" required>
+                <div class="invalid-feedback">Please enter a location</div>
+            </div>
+            <div class="form-group mb-3">
                 <label for="description" class="form-label">Description</label>
                 <div id="description" class="d-flex flex-row">
                     <textarea id="textarea" cols="120" rows="6"></textarea>
                 </div>
-<!--                <input class="form-control" type="textarea" name="description" id="description" required>-->
                 <div class="invalid-feedback">Please enter a description</div>
             </div>
             <input class="btn btn-dark" type="submit" value="Create">

@@ -5,8 +5,7 @@ from django.urls import reverse
 User = get_user_model()
 
 
-# models tests
-class LoginPageTests(TestCase):
+class LoginViewTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         """Runs once"""
@@ -28,7 +27,7 @@ class LoginPageTests(TestCase):
         self.assertContains(response, f'<a href="{reverse("register")}">Register here.</a>')
 
 
-class IndexPage(TestCase):
+class IndexViewTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         """Runs once"""

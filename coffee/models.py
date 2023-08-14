@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.urls import reverse
 from django.utils.text import slugify
 
 
@@ -12,25 +13,25 @@ class User(AbstractUser):
 
 
 class Cafe(models.Model):
-    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='creator')
+    contributor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='contributor')
     name = models.TextField(max_length=250)
     description = models.TextField()
     rating = models.DecimalField(null=True, decimal_places=2, max_digits=3)
     location = models.TextField(max_length=250)
 
     def __str__(self):
-        return f"{self.name} {self.creator}"
+        return f"{self.name} {self.location} {self.contributor}"
 
     def get_absolute_url(self):
-        pass
+        return reverse('cafe', kwargs={'cafe_id': self.id})
 
     def serialize(self):
         return {
-            "id": self.id,
+            "cafe_id": self.id,
             "name": self.name,
-            "creator": self.creator,
+            "contributor": self.contributor.username,
             "description": self.description,
-            "rating": self.rating
+            "rating": str(self.rating)
         }
 
 
