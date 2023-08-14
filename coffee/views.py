@@ -1,12 +1,11 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
-from django.urls import reverse
+from django.shortcuts import render, redirect
 from django.views.generic import ListView
 
-from .models import Cafe, User
+from .models import Cafe, User, Image
+from .forms import CafeForm
 
 
 class HomeView(ListView):
@@ -14,14 +13,33 @@ class HomeView(ListView):
     template_name = "coffee/index.html"
 
 
-@login_required
 def cafe_view(request):
     return render(request, "coffee/cafe.html")
 
 
-@login_required
-def new_cafe(request, cafe_id):
-    return render(request, "coffee/new.html")
+@login_required(login_url='login')
+def new_cafe(request):
+    if request.method == "POST":
+
+        # cafe populated with the user who is logged in
+        cafe = Cafe(contributor=request.user)
+        cafe_form = CafeForm(request.POST, instance=cafe)
+        images = request.FILES.getlist('images')
+
+        if cafe_form.is_valid():
+            cafe_form.save()
+
+            for image in images:
+                Image.objects.create(
+                    cafe=cafe,
+                    name=image
+                )
+
+            return redirect('index')
+    else:
+        cafe_form = CafeForm()
+
+    return render(request=request, template_name="coffee/new.html", context={'cafe_form': cafe_form})
 
 
 def login_view(request):
@@ -35,7 +53,7 @@ def login_view(request):
         # Check if authentication successful
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse("index"))
+            return redirect('index')
         else:
             return render(request, "coffee/login.html", {
                 "message": "Invalid username and/or password."
@@ -46,7 +64,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect(reverse("index"))
+    return redirect('index')
 
 
 def register(request):
@@ -72,6 +90,6 @@ def register(request):
                 "message": "Username already taken."
             })
         login(request, user)
-        return HttpResponseRedirect(reverse("index"))
+        return redirect('index')
     else:
         return render(request, "coffee/register.html")

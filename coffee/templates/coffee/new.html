@@ -10,7 +10,7 @@
         <div class="alert alert-danger" role="alert">{{ message }}</div>
         {% endif %}
 
-        <form class="needs-validation" action="{% url 'new' %}" method="post" novalidate>
+        <form class="needs-validation" action="{% url 'new' %}" method="post" enctype="multipart/form-data" novalidate>
             {% csrf_token %}
             <div class="form-group mb-3">
                 <label for="name" class="form-label">Name</label>
@@ -19,15 +19,24 @@
             </div>
             <div class="form-group mb-3">
                 <label for="location" class="form-label">Location</label>
-                <input class="form-control" autofocus type="text" name="location" id="location" required>
+                <input class="form-control" type="text" name="location" id="location" required>
                 <div class="invalid-feedback">Please enter a location</div>
             </div>
             <div class="form-group mb-3">
                 <label for="description" class="form-label">Description</label>
-                <div id="description" class="d-flex flex-row">
-                    <textarea id="textarea" cols="120" rows="6"></textarea>
+                <div class="d-flex flex-row">
+                    <textarea id="description" name="description" cols="120" rows="6" required></textarea>
                 </div>
                 <div class="invalid-feedback">Please enter a description</div>
+            </div>
+            <div class="form-group mb-3">
+                <label class="form-label">Images</label>
+                <div>
+                    <input required name="images" type="file" multiple class="form-control-file">
+                </div>
+            </div>
+            <div>
+
             </div>
             <input class="btn btn-dark" type="submit" value="Create">
         </form>

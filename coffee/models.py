@@ -36,11 +36,11 @@ class Cafe(models.Model):
 
 
 class Image(models.Model):
-    cafe = models.ForeignKey(Cafe, on_delete=models.CASCADE)
-    path = models.TextField(max_length=500)
+    cafe = models.ForeignKey(Cafe, default=None, on_delete=models.CASCADE)
+    name = models.ImageField(upload_to='images/', verbose_name='Image')
 
     def __str__(self):
-        return f"{self.cafe} {self.path}"
+        return f"{self.cafe} {self.name}"
 
 
 class Review(models.Model):
