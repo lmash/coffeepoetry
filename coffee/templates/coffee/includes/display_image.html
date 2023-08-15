@@ -1,9 +1,5 @@
 {% load static %}
 
 <div class="col-md-4">
-    {% if listing.internal_image %}
-    <img src="{% static listing.url %}" class="card-img" alt="{{ listing.title }}">
-    {% else %}
-    <img src="{{ listing.url }}" class="card-img" alt="{{ listing.title }}">
-    {% endif %}
+    <img src="{% static listing.url %}" class="card-img" alt="{{ cafe.name }}">
 </div>

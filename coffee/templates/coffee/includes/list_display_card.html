@@ -1,6 +1,12 @@
+{% load static %}
+{% get_media_prefix as MEDIA_PREFIX %}
+
 <div class="card mb-3 text-left border-2">
     <div class="row no-gutters">
-        {% include "coffee/includes/display_image.html" with cafe=cafe %}
+            <div class="col-md-4">
+                <img class="card-img" src="{{ MEDIA_PREFIX }}{{ cafe.first_photo }}" alt="Card image cap">
+            </div>
+
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title">{{ cafe.name }}</h5>
