@@ -1,6 +1,15 @@
 {% extends "coffee/layout.html" %}
+{% load static %}
 
 {% block body %}
-{% if user.is_authenticated %}
-{% endif %}
+
+<div class="container">
+    <h1 class="mt-2">All Cafés</h1>
+    {% for cafe in object_list %}
+
+    {% include "coffee/includes/list_display_card.html" with cafe=cafe %}
+
+    {% endfor %}
+</div>
+
 {% endblock %}
