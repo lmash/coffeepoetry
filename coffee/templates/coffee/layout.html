@@ -22,7 +22,7 @@
             </li>
             {% if user.is_authenticated %}
             <li class="nav-item">
-                <a class="nav-link" href="#">{{ request.user|title }}'s Cafés</a>
+                <a class="nav-link" href="{% url 'my_cafes' %}">{{ request.user|title }}'s Cafés</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'new' %}">New</a>

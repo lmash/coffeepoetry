@@ -18,6 +18,7 @@ part of the website which is there to encourage users to return more frequently
 The complexity comes from incorporating the review system along with the AI generation of a poem which will be 
 refreshed every time a coffee shops text or adjectives change. The project also uses testing more than any of the 
 previous projects - could put more here depending on test coverage obtained (perhaps a coverage html report?) 
+Images - Allow the uploading of multiple images
 
 
 ## File Descriptions

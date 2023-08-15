@@ -3,20 +3,24 @@
 
 <div class="card mb-3 text-left border-2">
     <div class="row no-gutters">
-            <div class="col-md-4">
-                <img class="card-img" src="{{ MEDIA_PREFIX }}{{ cafe.first_photo }}" alt="Card image cap">
+            <div class="col-md-3">
+                <img class="card-img" src="{{ MEDIA_PREFIX }}{{ cafe.first_photo }}" alt="Cafe image">
             </div>
 
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="card-body">
                     <h5 class="card-title">{{ cafe.name }}</h5>
                     <p>{{ cafe.location }}</p>
                     <p class="card-text">{{ cafe.description }}</p>
                 </div>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-center my-2">
-                    <a href="{{ listing.get_absolute_url }}" class="btn btn-primary">View Listing</a>
-                </div>
             </div>
-<!--        {% include "coffee/includes/display_poetry.html" with cafe=cafe %}-->
+
+        <div class="col-md-3 d-flex align-items-center">
+            <div class="card-body haiku">
+                <div>An old silent pond</div>
+                <div>A frog jumps into the pond</div>
+                <div>Splash! Silence again.</div>
+            </div>
+        </div>
     </div>
 </div>

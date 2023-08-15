@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.db.models import OuterRef, Subquery
 from django.shortcuts import render, redirect
+from django.utils.decorators import method_decorator
 from django.views.generic import ListView
 
 from .models import Cafe, User, Image
@@ -15,11 +16,29 @@ class HomeView(ListView):
 
     def get_queryset(self):
         cafes = (
-            Cafe.objects  # Get all Cafe's
-            # .select_related('posted_by')          # resolve posted_by with corresponding user
-            .all()
-            .order_by('-rating', 'name')  # Order by descending rating and then name
-            .annotate(first_photo=Subquery(  # Add the first image found for the Cafe
+            Cafe.objects
+            .all()                                  # Get all Cafe's
+            .order_by('-rating', 'name')            # Order by descending rating and then name
+            .annotate(first_photo=Subquery(         # Add the first image found for the Cafe
+                Image.objects.filter(
+                    cafe_id=OuterRef('pk'))
+                .values('name')[:1]))
+        )
+
+        return cafes
+
+
+@method_decorator(login_required, name='dispatch')
+class MyCafesView(ListView):
+    model = Cafe
+    template_name = "coffee/my_cafes.html"
+
+    def get_queryset(self):
+        cafes = (
+            Cafe.objects                            # Get Cafe's
+            .filter(contributor=self.request.user)  # Filter by logged in user
+            .order_by('-rating', 'name')            # Order by descending rating and then name
+            .annotate(first_photo=Subquery(         # Add the first image found for the Cafe
                 Image.objects.filter(
                     cafe_id=OuterRef('pk'))
                 .values('name')[:1]))
@@ -36,7 +55,7 @@ def cafe_view(request):
 def new_cafe(request):
     if request.method == "POST":
 
-        # cafe populated with the user who is logged in
+        # Populate cafe with the user who is logged in
         cafe = Cafe(contributor=request.user)
         cafe_form = CafeForm(request.POST, instance=cafe)
         images = request.FILES.getlist('images')
