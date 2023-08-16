@@ -47,7 +47,7 @@ class MyCafesView(ListView):
         return cafes
 
 
-def cafe_view(request):
+def cafe_view(request, cafe_id):
     return render(request, "coffee/cafe.html")
 
 

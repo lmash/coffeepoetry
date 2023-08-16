@@ -9,7 +9,7 @@
 
             <div class="col-md-5">
                 <div class="card-body">
-                    <h5 class="card-title">{{ cafe.name }}</h5>
+                    <h5 class="card-title"><a href="{% url 'cafe' cafe.pk %}">{{ cafe.name }}</a></h5>
                     <p>{{ cafe.location }}</p>
                     <p class="card-text">{{ cafe.description }}</p>
                 </div>
