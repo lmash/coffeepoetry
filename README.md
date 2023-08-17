@@ -2,6 +2,8 @@
 A website which allows one to add and review coffee shops, and then generates a poem 
 for a coffee shop based on its description and adjectives provided
 
+Only the user who created a cafe can edit it 
+
 ## Technologies
 
 ## Setup

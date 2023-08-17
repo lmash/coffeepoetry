@@ -49,13 +49,16 @@ class MyCafesView(ListView):
 
 def cafe_view(request, cafe_id):
 
+    cafe = Cafe.objects.get(id=cafe_id)
+
     images = (
         Image.objects
         .filter(cafe=cafe_id)
     )
 
     return render(request, "coffee/cafe.html", context={
-        "images": images
+        "images": images,
+        "cafe": cafe,
     })
 
 
