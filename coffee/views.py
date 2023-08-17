@@ -48,7 +48,15 @@ class MyCafesView(ListView):
 
 
 def cafe_view(request, cafe_id):
-    return render(request, "coffee/cafe.html")
+
+    images = (
+        Image.objects
+        .filter(cafe=cafe_id)
+    )
+
+    return render(request, "coffee/cafe.html", context={
+        "images": images
+    })
 
 
 @login_required(login_url='login')

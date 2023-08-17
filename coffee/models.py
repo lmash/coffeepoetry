@@ -5,6 +5,7 @@ from django.utils.text import slugify
 
 
 class User(AbstractUser):
+    # TODO At the end look to see whether slug field is ever used, if not remove
     slug = models.SlugField(null=False, unique=True)
 
     def save(self, *args, **kwargs):
@@ -41,6 +42,12 @@ class Image(models.Model):
 
     def __str__(self):
         return f"{self.cafe} {self.name}"
+
+    def serialize(self):
+        return {
+            "cafe_id": self.cafe,
+            "name": self.name
+        }
 
 
 class Review(models.Model):
