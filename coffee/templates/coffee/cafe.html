@@ -7,7 +7,8 @@
         <h2>Café</h2>
 
         <div class="card" style="width: auto;">
-            <div id="carouselExampleSlidesOnly" class="card-img-top carousel slide carousel-fade" data-bs-ride="carousel">
+            <div id="carouselExampleSlidesOnly" class="card-img-top carousel slide carousel-fade"
+                 data-bs-ride="carousel">
                 <div class="carousel-inner">
                     {% for image in images %}
                     <div class="carousel-item">
@@ -21,10 +22,25 @@
                 <p>{{ cafe.location }}</p>
                 <p class="card-text">{{ cafe.description }}</p>
                 {% if request.user == cafe.contributor %}
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <a href="#" class="btn btn-dark">Edit</a>
                 {% endif %}
             </div>
+
+            <div class="star">
+                <div class="stars-outer">
+                    <div class="stars-inner"></div>
+                </div>
+            </div>
         </div>
+
+        <div class="card d-flex align-items-center border-0" style="width: auto; background-color: #f6ebd8;">
+            <div class="card-body haiku">
+                <div>An old silent pond</div>
+                <div>A frog jumps into the pond</div>
+                <div>Splash! Silence again.</div>
+            </div>
+        </div>
+
     </div>
 </div>
 

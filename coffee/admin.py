@@ -9,7 +9,7 @@ class UserAdmin(admin.ModelAdmin):
 
 
 class CafeAdmin(admin.ModelAdmin):
-    list_display = ("name", "location", "contributor")
+    list_display = ("name", "location")
 
 
 class ImageAdmin(admin.ModelAdmin):
