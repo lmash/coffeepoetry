@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
     let carousel_items = document.getElementsByClassName('carousel-item');
     carousel_items[0].setAttribute("class", "carousel-item active");
 
-
     // Need some code here to grab the rating from Cafe model
     // Code originally from https://webdesign.tutsplus.com/a-simple-javascript-technique-for-filling-star-ratings--cms-29450t
     const starTotal = 5;

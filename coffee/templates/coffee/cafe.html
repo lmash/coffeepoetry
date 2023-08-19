@@ -18,18 +18,16 @@
                 </div>
             </div>
             <div class="card-body">
-                <h5 class="card-title">{{ cafe.name }}</h5>
+                <div class="flex d-flex justify-content-between">
+                    <h5 class="card-title">{{ cafe.name }}</h5>
+                    <span>{% include "coffee/includes/star_rating.html" %}</span>
+                </div>
+
                 <p>{{ cafe.location }}</p>
                 <p class="card-text">{{ cafe.description }}</p>
                 {% if request.user == cafe.contributor %}
                 <a href="#" class="btn btn-dark">Edit</a>
                 {% endif %}
-            </div>
-
-            <div class="star">
-                <div class="stars-outer">
-                    <div class="stars-inner"></div>
-                </div>
             </div>
         </div>
 

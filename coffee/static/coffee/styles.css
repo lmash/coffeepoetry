@@ -18,6 +18,7 @@ body {
 .haiku {
   font-style: italic;
   font-family: Konatsu;
+  font-size: 17px;
 }
 
 h5>a {
@@ -30,6 +31,7 @@ h5>a {
   display: inline-block;
   position: relative;
   font-family: FontAwesome;
+  font-size: 20px;
 }
 .stars-outer::before {
   content: "\f006 \f006 \f006 \f006 \f006";
