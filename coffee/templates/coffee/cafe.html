@@ -25,9 +25,14 @@
 
                 <p>{{ cafe.location }}</p>
                 <p class="card-text">{{ cafe.description }}</p>
-                {% if request.user == cafe.contributor %}
-                <a href="#" class="btn btn-dark">Edit</a>
-                {% endif %}
+                <div class="flex d-flex justify-content-between">
+                    <div></div>
+                    {% if request.user == cafe.contributor %}
+                    <a href="#" class="btn btn-light">Edit</a>
+                    {% endif %}
+                    <a href="#" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Review</a>
+                    {% include "coffee/includes/review.html" %}
+                </div>
             </div>
         </div>
 
