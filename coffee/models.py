@@ -52,11 +52,11 @@ class Image(models.Model):
 
 class Review(models.Model):
     class Rating(models.IntegerChoices):
-        ONE_BEAN = 1
-        TWO_BEANS = 2
-        THREE_BEANS = 3
-        FOUR_BEANS = 4
-        FIVE_BEANS = 5
+        ONE_STAR = 1
+        TWO_STARS = 2
+        THREE_STARS = 3
+        FOUR_STARS = 4
+        FIVE_STARS = 5
 
     reviewer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviewer')
     cafe = models.ForeignKey(Cafe, on_delete=models.CASCADE)
