@@ -48,3 +48,10 @@ h5>a {
   content: "\f005 \f005 \f005 \f005 \f005";
   color: #654321;
 }
+.review_text {
+  width: 160px
+}
+
+.star_text {
+  width: 40px
+}

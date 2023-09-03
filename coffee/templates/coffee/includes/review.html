@@ -4,12 +4,40 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Review</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                ...
-
+                <div class="flex d-flex justify-content-around">
+                    <span class="review_text">Quality</span>
+                    <input type="range" id="qualityInputId" value="4" min="1"
+                           max="5" step="1"
+                           oninput="qualityOutputId.value = qualityInputId.value">
+                    <div>
+                        <output id="qualityOutputId">4</output>
+                        <span class="star_text"></span>
+                    </div>
+                </div>
+                <div class="flex d-flex justify-content-around">
+                    <span class="review_text">Latte Art</span>
+                    <input type="range" id="artInputId" value="4" min="1"
+                           max="5" step="1"
+                           oninput="artOutputId.value = artInputId.value">
+                    <div>
+                        <output id="artOutputId">4</output>
+                        <span class="star_text"></span>
+                    </div>
+                </div>
+                <div class="flex d-flex justify-content-around">
+                    <span class="review_text">Barrista Friendliness</span>
+                    <input type="range" id="barristaInputId" value="4" min="1"
+                           max="5" step="1"
+                           oninput="barristaOutputId.value = barristaInputId.value">
+                    <div>
+                        <output id="barristaOutputId">4</output>
+                        <span class="star_text"></span>
+                    </div>
+                </div>
 
             </div>
             <div class="modal-footer flex d-flex justify-content-between">
