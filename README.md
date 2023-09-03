@@ -110,13 +110,14 @@ Images - Allow the uploading of multiple images. For additional complexity the s
 
 Non-Python files:
 
-| filename             | description                                             |
-|----------------------|---------------------------------------------------------|
-| README.md            | Text file (markdown format) description of the project. |
-| requirements.txt     | Text file of packages to be installed by pip.           |
-| coffee/cafe.js       | Javascript file #TO DO                                  |
-| coffee/styles.css    | Css file with shared styling for the project.           |
-| coffee/validation.js | Javascript file to apply form validation                |
+| filename             | description                                                                                             |
+|----------------------|---------------------------------------------------------------------------------------------------------|
+| README.md            | Text file (markdown format) description of the project.                                                 |
+| requirements.txt     | Text file of packages to be installed by pip.                                                           |
+| .env.example         | Text file for API keys to be populated and renamed.                                                     |
+| coffee/cafe.js       | Javascript file. Contains most of the review logic and  listeners for events, updates stars and ratings |
+| coffee/styles.css    | Css file with shared styling for the project.                                                           |
+| coffee/validation.js | Javascript file to apply form validation                                                                |
 
 HTML files in the templates/coffee folder:
 
@@ -136,7 +137,13 @@ HTML files in the templates/coffee folder:
 
 Python modules:
 
-| filename            | description                                                                         |
-| ------------------- | ----------------------------------------------------------------------------------- |
-| milestone_2.py      | Create variables for the game                                                       |
+| filename  | description                                                                                      |
+|-----------|--------------------------------------------------------------------------------------------------|
+| admin.py  | Classes for Model Administration. Entries allow  models to be updated via django admin           |
+| apps.py   | ???                                                                                              |
+| forms.py  | Classes for form entry                                                                           |
+| models.py | Model Classes. Has entries for the following models: User, Cafe, Image, Review, Adjective & Poem |
+| urls.py   | ???                                                                                              |
+| utils.py  | Classes for Model Administration. Entries allow  models to be updated via django admin           |
+| views.py  | ???                                                                                              |
 

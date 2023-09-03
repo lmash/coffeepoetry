@@ -150,7 +150,7 @@ def update_cafe_rating(cafe):
     cafe.save()
 
 
-def review(request, cafe_id):
+def review_view(request, cafe_id):
     cafe = Cafe.objects.get(id=cafe_id)
 
     if request.method == "POST":
@@ -172,3 +172,8 @@ def review(request, cafe_id):
         update_cafe_rating(cafe)
 
     return JsonResponse({'review': cafe.serialize()}, status=200)
+
+
+def rating_view(request, cafe_id):
+    cafe = Cafe.objects.get(id=cafe_id)
+    return JsonResponse({'rating': cafe.rating}, status=200)

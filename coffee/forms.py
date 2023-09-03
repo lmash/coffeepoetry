@@ -12,7 +12,6 @@ class CafeForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'size': 50, }),
             'description': forms.Textarea(attrs={'rows': 6, 'cols': 120, }),
             'location': forms.TextInput(attrs={'size': 50, }),
-            # 'url': forms.TextInput(attrs={'size': 70, 'placeholder': 'auctions/images/xxxxx.jpg'}),
         }
 
 

@@ -17,20 +17,11 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     })
 
-    // Set first image as active
+    // Set first image as active in Carousel
     let carousel_items = document.getElementsByClassName('carousel-item');
     carousel_items[0].setAttribute("class", "carousel-item active");
 
-    // Need some code here to grab the rating from Cafe model
-    // Code originally from https://webdesign.tutsplus.com/a-simple-javascript-technique-for-filling-star-ratings--cms-29450t
-    const starTotal = 5;
-    const class_name = "star";
-    const rating = 2.5;
-
-    const starPercentage = (rating / starTotal) * 100;
-    const starPercentageRounded = `${(Math.round(starPercentage / 10) * 10)}%`;
-    document.querySelector(`.${class_name} .stars-inner`).style.width = starPercentageRounded;
-
+    get_rating();
 
     // Add event listener to Save Button in Modal
     const saveButton = document.querySelector('.save-review');
@@ -38,6 +29,32 @@ document.addEventListener('DOMContentLoaded', function () {
         save_review(event);
     })
 })
+
+function get_rating() {
+    // Get cafe rating from the Cafe model and then update the rating in Stars
+    const cafe_id = document.getElementById(`cafeId`).value;
+    
+    fetch(`/rating/${cafe_id}`)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        draw_stars(data['rating'])
+    })
+    .catch(error => {
+        console.log('Error:', error);
+    });    
+}
+
+function draw_stars(rating) {
+    // Draw the stars as the rating out of 5
+    // Code originally from https://webdesign.tutsplus.com/a-simple-javascript-technique-for-filling-star-ratings--cms-29450t
+    const starTotal = 5;
+    const class_name = "star";
+
+    const starPercentage = (rating / starTotal) * 100;
+    const starPercentageRounded = `${(Math.round(starPercentage / 10) * 10)}%`;
+    document.querySelector(`.${class_name} .stars-inner`).style.width = starPercentageRounded;
+}
 
 function update_stars_text(num_stars, stars_element) {
     // Stars text should have value of "Star" if range input is 1 and "Stars" for all other values

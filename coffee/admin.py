@@ -16,6 +16,11 @@ class ImageAdmin(admin.ModelAdmin):
     list_display = ("id", "cafe", "path")
 
 
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ("cafe", "reviewer", "created_at", "score")
+
+
 admin.site.register(User, UserAdmin)
 admin.site.register(Cafe)
 admin.site.register(Image)
+admin.site.register(Review, ReviewAdmin)

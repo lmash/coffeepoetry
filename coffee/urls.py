@@ -14,5 +14,6 @@ urlpatterns = [
 
     path("new", views.new_cafe, name="new"),
     path("cafe/<int:cafe_id>", views.cafe_view, name="cafe"),
-    path("review/<int:cafe_id>", views.review, name="review"),
+    path("review/<int:cafe_id>", views.review_view, name="review"),
+    path("rating/<int:cafe_id>", views.rating_view, name="rating"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
