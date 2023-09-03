@@ -1,12 +1,14 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
-from django.db.models import OuterRef, Subquery
+from django.db.models import OuterRef, Subquery, Sum
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView
+import json
 
-from .models import Cafe, User, Image
+from .models import Cafe, User, Image, Review
 from .forms import CafeForm
 
 
@@ -138,3 +140,35 @@ def register(request):
         return redirect('index')
     else:
         return render(request, "coffee/register.html")
+
+
+def update_cafe_rating(cafe):
+    total = (Review.objects.all().filter(cafe=cafe).aggregate(Sum('score')))
+    num_reviews = (Review.objects.all().filter(cafe=cafe).count())
+
+    cafe.rating = total['score__sum']/num_reviews
+    cafe.save()
+
+
+def review(request, cafe_id):
+    cafe = Cafe.objects.get(id=cafe_id)
+
+    if request.method == "POST":
+        data = json.loads(request.body)
+        user_review = Review(
+            cafe=cafe,
+            reviewer=request.user,
+            quality=data['quality'],
+            latte_art=data['latte_art'],
+            barrista_friendliness=data['barrista_friendliness'],
+            price=data['price'],
+            opening_hours=data['opening_hours']
+        )
+        user_review.score = (user_review.quality + user_review.latte_art +
+                             user_review.barrista_friendliness +
+                             user_review.price + user_review.opening_hours) / 5
+        user_review.full_clean()
+        user_review.save()
+        update_cafe_rating(cafe)
+
+    return JsonResponse({'review': cafe.serialize()}, status=200)

@@ -6,32 +6,16 @@ document.addEventListener('DOMContentLoaded', function () {
     reviewRanges.forEach(range => {
         const num_stars = range.getAttribute('value')
         const stars_element = range.nextElementSibling
-        let span = stars_element.getElementsByTagName('span')
 
-        // Update text to Star/Stars depending on number
-        if (num_stars === "1") {
-            span[0].innerText = " Star";
-        }
-        else {
-            span[0].innerText = " Stars";
-        }
+        update_stars_text(num_stars, stars_element)
     })
 
     // Set Stars Text after range changed
     reviewRanges.forEach(range => {
         range.addEventListener('input', event => {
-            update_stars_text(event);
+            call_stars_text_update(event);
         })
     })
-
-    // let i = document.querySelectorAll('input');
-
-    // // Set Stars Text after range changed
-    // i.forEach(range => {
-    //     range.addEventListener('input', event => {
-    //         update_stars_text(event);
-    //     })
-    // })
 
     // Set first image as active
     let carousel_items = document.getElementsByClassName('carousel-item');
@@ -41,28 +25,72 @@ document.addEventListener('DOMContentLoaded', function () {
     // Code originally from https://webdesign.tutsplus.com/a-simple-javascript-technique-for-filling-star-ratings--cms-29450t
     const starTotal = 5;
     const class_name = "star";
-    const rating = 2.5
+    const rating = 2.5;
 
     const starPercentage = (rating / starTotal) * 100;
     const starPercentageRounded = `${(Math.round(starPercentage / 10) * 10)}%`;
     document.querySelector(`.${class_name} .stars-inner`).style.width = starPercentageRounded;
 
+
+    // Add event listener to Save Button in Modal
+    const saveButton = document.querySelector('.save-review');
+    saveButton.addEventListener('click', event => {
+        save_review(event);
+    })
 })
 
-function update_stars_text(event) {
-    // Stars text should have value of "Star" if range input is one and "Stars" for all other values
-    console.log(event);
-    const num_stars = event.target.value
-    const stars_element = event.target.nextElementSibling
+function update_stars_text(num_stars, stars_element) {
+    // Stars text should have value of "Star" if range input is 1 and "Stars" for all other values
+    let span = stars_element.getElementsByTagName('span');
 
-    let span = stars_element.getElementsByTagName('span')
-
-    // Update text to Star/Stars depending on number
     if (num_stars === "1") {
-        span[0].innerText = " Star";
+        span[0].innerText = " Star ";
     }
     else {
         span[0].innerText = " Stars";
     }    
 
+  }
+
+  function call_stars_text_update(event) {
+    // Get number of stars and the element to update after range value changed
+    const num_stars = event.target.value;
+    const stars_element = event.target.nextElementSibling;
+
+    update_stars_text(num_stars, stars_element);
+  }
+
+  function save_review(event) {
+    // Save a review
+    const csrftoken = Cookies.get('csrftoken');
+
+    const cafe_id = document.getElementById(`cafeId`).value;
+    let quality = parseInt(document.getElementById(`qualityOutputId`).value);
+    let latte_art = parseInt(document.getElementById(`artOutputId`).value);
+    let barrista_friendliness = parseInt(document.getElementById(`barristaOutputId`).value);
+    let price = parseInt(document.getElementById(`priceOutputId`).value);
+    let opening_hours = parseInt(document.getElementById(`openOutputId`).value);
+
+    console.log(cafe_id);
+
+    fetch(`/review/${cafe_id}`, {
+        credentials: 'include',
+        method: 'POST',
+        mode: 'same-origin',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+        },
+        body: JSON.stringify({
+            quality: quality,
+            latte_art: latte_art,
+            barrista_friendliness: barrista_friendliness,
+            price: price,
+            opening_hours: opening_hours
+        })
+    })
+        .catch(error => {
+            console.log('Error:', error);
+        });
   }
