@@ -87,7 +87,7 @@ class CafeTest(TestCase):
         self.assertEqual(field_label, 'location')
 
     def test_get_absolute_url(self):
-        self.assertEqual(self.cafe.get_absolute_url(), '/cafe/2')
+        self.assertEqual(self.cafe.get_absolute_url(), f'/cafe/{self.cafe.pk}')
 
     def test_dunder_str(self):
         """method: __str__"""
@@ -98,7 +98,7 @@ class CafeTest(TestCase):
         """Serialize to json"""
         cafe_serialized = self.cafe.serialize()
         self.assertDictEqual(cafe_serialized, {
-            'cafe_id': 2,
+            'cafe_id': self.cafe.pk,
             'name': "Ziggy's",
             'contributor': 'test_user_1',
             'description': 'Alas no longer',

@@ -33,7 +33,7 @@ class EligibilityTest(TestCase):
 
     def setUp(self):
         """setUp: Run once for every test method to set up clean data."""
-        self.cafe = Cafe.objects.get(id=1)
+        self.cafe = Cafe.objects.get(name="Ziggy's")
         CoffeeDescription.objects.create(
             cafe=self.cafe,
             description='Smooth and mellow with hints of orange'
@@ -48,10 +48,16 @@ class EligibilityTest(TestCase):
         )
 
     def test_cafe_eligible_where_3_descriptions_exist(self):
-        assert utils.cafe_eligible(self.cafe)
+        assert utils.cafe_eligible(self.cafe) is True
 
-    def test_cafe_not_eligible_where_2_descriptions_exist(self):
-        pass
+    def test_cafe_not_eligible_when_no_descriptions(self):
+        cafe = Cafe.objects.create(
+            contributor=self.test_user_1,
+            name="Test Cafe",
+            description="Test Cafe",
+            location="",
+        )
+        assert utils.cafe_eligible(cafe) is False
 
 
 def test_get_cafe_and_coffee_descriptions():
