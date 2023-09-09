@@ -17,7 +17,7 @@ def test_content_of_haiku_reduced_to_first_three_lines():
                                             "Taste of darkness, bliss."
 
 
-class EligibilityTest(TestCase):
+class UtilsTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         """setUpTestData: Run once to set up non-modified data for all class methods."""
@@ -28,7 +28,8 @@ class EligibilityTest(TestCase):
             name="Ziggy's",
             description="Alas no longer",
             location="Sydenham",
-            rating=3.4
+            rating=3.4,
+            check_for_haiku=True
         )
 
     def setUp(self):
@@ -40,7 +41,7 @@ class EligibilityTest(TestCase):
         )
         CoffeeDescription.objects.create(
             cafe=self.cafe,
-            description='Smooth and mellow with hints of orange, tasty'
+            description='Bubbly and truly delicious.. invigorating'
         )
         CoffeeDescription.objects.create(
             cafe=self.cafe,
@@ -59,6 +60,8 @@ class EligibilityTest(TestCase):
         )
         assert utils.cafe_eligible(cafe) is False
 
-
-def test_get_cafe_and_coffee_descriptions():
-    pass
+    def test_random_coffee_descriptions(self):
+        three_descriptions = utils.get_random_coffee_descriptions(self.cafe)
+        assert three_descriptions.find('Smooth and mellow with hints of orange') != -1
+        assert three_descriptions.find('Bubbly and truly delicious.. invigorating') != -1
+        assert three_descriptions.find('Roasted') != -1

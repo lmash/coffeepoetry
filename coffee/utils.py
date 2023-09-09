@@ -5,7 +5,7 @@ import openai
 import random
 
 
-from .models import Cafe, CoffeeDescription, Review
+from .models import Cafe, CoffeeDescription, Review, Poem
 
 
 # Load your API key from an environment variable or secret management service
@@ -19,22 +19,11 @@ def reduce_content(text: str) -> str:
     return "\n".join((lines[0], lines[1], lines[2]))
 
 
-def get_haiku(cafe: str = None, coffee: str = None) -> str:
+def get_haiku(cafe: str, coffee: str) -> str:
     """
         AI call to generate a haiku based on cafe and coffee descriptions provided
         Returns haiku
     """
-    if not coffee:
-        coffee = """
-                    perfectly roasted bean
-                    pretty latte art 
-                    tasty
-                    dark
-        """
-
-    if not cafe:
-        cafe = """This is the best coffee in the area by far. The people are always friendly."""
-
     chat_completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": f"""
@@ -87,21 +76,44 @@ def cafe_eligible(cafe) -> bool:
     return CoffeeDescription.objects.filter(cafe=cafe.pk).count() >= 3
 
 
-def get_random_coffee_descriptions():
-    pass
+def get_random_coffee_descriptions(cafe) -> str:
+    """Returns a '.' delimited string with 3 random descriptions"""
+    coffee_descriptions_query_set = (
+        CoffeeDescription.objects
+        .filter(cafe=cafe.pk)
+        .order_by('pk')
+        .values("description")
+    )
+
+    descriptions = [
+        description
+        for value in coffee_descriptions_query_set
+        for description in value.values()
+    ]
+
+    return ". ".join(random.sample(descriptions, 3))
 
 
 def get_cafe_and_coffee_descriptions(cafe) -> (str, str):
     """
-    Get the records matching the cafe provided
-    Select 3 cafe descriptions randomly
-    Returns a tuple of 2 strings (cafe_descriptions, coffee_descriptions)
+    Returns a tuple of 2 strings
+     - the cafe description
+     - the coffe descriptions (3 of them)
     """
     cafe_description = Cafe.objects.get(id=cafe.pk).description
-    if cafe_eligible():
-        coffee_descriptions = ""
+    coffee_descriptions = get_random_coffee_descriptions(cafe)
 
-    return "", ""
+    return cafe_description, coffee_descriptions
 
-# poem = get_haiku()
-# print(poem)
+
+def joining_the_dots():
+    """Iterate over poetry candidates, where eligible generate a haiku, save it and reset check_for_haiku to False"""
+    poetry_candidates = Cafe.objects.filter(check_for_haiku=True)
+
+    for cafe in poetry_candidates:
+        if cafe_eligible(cafe):
+            cafe_description, coffee_descriptions = get_cafe_and_coffee_descriptions(cafe)
+            haiku = get_haiku(cafe=cafe_description, coffee=coffee_descriptions)
+
+            poem = Poem(cafe=cafe, haiku=haiku, check_for_haiku=False)
+            poem.save()
