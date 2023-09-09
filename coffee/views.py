@@ -8,7 +8,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import ListView
 import json
 
-from .models import Cafe, User, Image, Review
+from .models import Cafe, User, Image, Review, CoffeeDescription
 from .forms import CafeForm
 
 
@@ -162,7 +162,7 @@ def review_view(request, cafe_id):
             latte_art=data['latte_art'],
             barrista_friendliness=data['barrista_friendliness'],
             price=data['price'],
-            opening_hours=data['opening_hours']
+            opening_hours=data['opening_hours'],
         )
         user_review.score = (user_review.quality + user_review.latte_art +
                              user_review.barrista_friendliness +
@@ -170,6 +170,15 @@ def review_view(request, cafe_id):
         user_review.full_clean()
         user_review.save()
         update_cafe_rating(cafe)
+
+        # Only save an entry to CoffeeDescription if a description was entered
+        if data['coffee_description']:
+            description = CoffeeDescription(
+                cafe=cafe,
+                description=data['coffee_description']
+            )
+            description.full_clean()
+            description.save()
 
     return JsonResponse({'review': cafe.serialize()}, status=200)
 

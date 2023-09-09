@@ -37,7 +37,6 @@ function get_rating() {
     fetch(`/rating/${cafe_id}`)
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         draw_stars(data['rating'])
     })
     .catch(error => {
@@ -79,14 +78,17 @@ function update_stars_text(num_stars, stars_element) {
 
   function save_review(event) {
     // Save a review
+    event.preventDefault();
     const csrftoken = Cookies.get('csrftoken');
 
-    const cafe_id = document.getElementById(`cafeId`).value;
-    let quality = parseInt(document.getElementById(`qualityOutputId`).value);
-    let latte_art = parseInt(document.getElementById(`artOutputId`).value);
-    let barrista_friendliness = parseInt(document.getElementById(`barristaOutputId`).value);
-    let price = parseInt(document.getElementById(`priceOutputId`).value);
-    let opening_hours = parseInt(document.getElementById(`openOutputId`).value);
+    const cafe_id = document.getElementById('cafeId').value;
+    let quality = parseInt(document.getElementById('qualityOutputId').value);
+    let latte_art = parseInt(document.getElementById('artOutputId').value);
+    let barrista_friendliness = parseInt(document.getElementById('barristaOutputId').value);
+    let price = parseInt(document.getElementById('priceOutputId').value);
+    let opening_hours = parseInt(document.getElementById('openOutputId').value);
+
+    const coffee_description = document.getElementById('coffeeDescription').value
 
     console.log(cafe_id);
 
@@ -104,7 +106,8 @@ function update_stars_text(num_stars, stars_element) {
             latte_art: latte_art,
             barrista_friendliness: barrista_friendliness,
             price: price,
-            opening_hours: opening_hours
+            opening_hours: opening_hours,
+            coffee_description: coffee_description
         })
     })
         .catch(error => {

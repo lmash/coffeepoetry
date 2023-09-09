@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from . models import User, Cafe, Review, Image
+from . models import User, Cafe, Review, Image, CoffeeDescription
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -10,6 +10,10 @@ class UserAdmin(admin.ModelAdmin):
 
 class CafeAdmin(admin.ModelAdmin):
     list_display = ("name", "location")
+
+
+class CoffeeDescriptionAdmin(admin.ModelAdmin):
+    list_display = ("cafe", "created_at", "description")
 
 
 class ImageAdmin(admin.ModelAdmin):
@@ -22,5 +26,6 @@ class ReviewAdmin(admin.ModelAdmin):
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Cafe)
+admin.site.register(CoffeeDescription, CoffeeDescriptionAdmin)
 admin.site.register(Image)
 admin.site.register(Review, ReviewAdmin)
