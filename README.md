@@ -5,6 +5,12 @@ for a cafè based on its description and adjectives provided
 
 Only the user who created a cafè can edit it 
 
+## Poetry Generation
+- Each time a review description is entered the café is identified as a candidate for poetry generation
+- Generation runs as a separate process on a regular schedule (currently x minutes)
+- Only cafés with an average rating of 4.2 or higher and 3 or more review descriptions can generate poetry
+- The AI uses a combination of the café and coffee descriptions (3 coffee descriptions are randomly selected) to generate the haiku
+
 ## Technologies
 
 ### Setup Pre-Requisite

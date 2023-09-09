@@ -1,6 +1,10 @@
+from django.db.models import Sum
 from dotenv import load_dotenv
 import os
 import openai
+
+
+from .models import Cafe, CoffeeDescription, Review
 
 
 # Load your API key from an environment variable or secret management service
@@ -46,6 +50,31 @@ def get_haiku(adjectives=None, cafe_description=None) -> str:
     content = chat_completion.choices[0].message.content
     haiku = reduce_content(content)
     return haiku
+
+
+def update_cafe_rating(cafe):
+    total = (Review.objects.all().filter(cafe=cafe).aggregate(Sum('score')))
+    num_reviews = (Review.objects.all().filter(cafe=cafe).count())
+
+    cafe.rating = total['score__sum']/num_reviews
+    cafe.save()
+
+
+def update_coffee_description(cafe, data):
+    """Update the coffee description with the text entered"""
+    description = CoffeeDescription(
+        cafe=cafe,
+        description=data['coffee_description']
+    )
+    description.full_clean()
+    description.save()
+
+
+def add_cafe_for_poetry_generation(cafe):
+    """Mark the cafe as eligible for poetry generation"""
+    cafe = Cafe.objects.get(id=cafe.pk)
+    cafe.check_for_haiku = True
+    cafe.save()
 
 # poem = get_haiku()
 # print(poem)

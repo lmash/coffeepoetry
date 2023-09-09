@@ -9,7 +9,7 @@ class UserAdmin(admin.ModelAdmin):
 
 
 class CafeAdmin(admin.ModelAdmin):
-    list_display = ("name", "location")
+    list_display = ("name", "location", "check_for_haiku")
 
 
 class CoffeeDescriptionAdmin(admin.ModelAdmin):

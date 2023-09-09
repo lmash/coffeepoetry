@@ -19,6 +19,7 @@ class Cafe(models.Model):
     description = models.TextField()
     rating = models.DecimalField(null=True, decimal_places=2, max_digits=3)
     location = models.TextField(max_length=250)
+    check_for_haiku = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.name} {self.location} {self.contributor}"
