@@ -28,7 +28,7 @@ def populate_cafes(apps, schema_editor):
 
     cafe_name = '41'
     Cafe(
-        contributor=User.objects.get(username='fred'),
+        contributor=User.objects.get(username='Fred'),
         name=cafe_name,
         description='T.B.C.',
         location='Forest Hill'

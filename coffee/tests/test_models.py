@@ -13,7 +13,7 @@ class UserModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         """setUpTestData: Run once to set up non-modified data for all class methods."""
-        cls.fred = User.objects.create(username='fred')
+        cls.test_user_1 = User.objects.create(username='test_user_1')
         cls.Client = Client()
 
     def setUp(self):
@@ -22,7 +22,7 @@ class UserModelTest(TestCase):
 
     def test_slug_label(self):
         """Method: test_false_is_false."""
-        field_label = self.fred._meta.get_field('slug').verbose_name
+        field_label = self.test_user_1._meta.get_field('slug').verbose_name
         self.assertEqual(field_label, 'slug')
 
 
@@ -30,10 +30,10 @@ class CafeTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         """setUpTestData: Run once to set up non-modified data for all class methods."""
-        cls.fred = User.objects.create(username='fred')
+        cls.test_user_1 = User.objects.create(username='test_user_1')
         cls.Client = Client()
         Cafe.objects.create(
-            contributor=cls.fred,
+            contributor=cls.test_user_1,
             name="Ziggy's",
             description="Alas no longer",
             location="Sydenham",
@@ -42,7 +42,7 @@ class CafeTest(TestCase):
 
     def setUp(self):
         """setUp: Run once for every test method to set up clean data."""
-        self.cafe = Cafe.objects.get(id=1)
+        self.cafe = Cafe.objects.get(name="Ziggy's")
 
     def test_name_label(self):
         field_label = self.cafe._meta.get_field('name').verbose_name
@@ -63,23 +63,23 @@ class CafeTest(TestCase):
     def test_rating_not_mandatory(self):
         """Rating field is not mandatory and for a newly created record defaults to None"""
         Cafe.objects.create(
-            contributor=self.fred,
+            contributor=self.test_user_1,
             name="Cafe",
             description="Cafe with no rating",
             location="Sydenham",
         )
-        cafe = Cafe.objects.get(id=2)
+        cafe = Cafe.objects.get(name="Cafe")
         self.assertIsNone(cafe.rating)
 
     def test_rating_rounds_to_two_decimal_places(self):
         Cafe.objects.create(
-            contributor=self.fred,
+            contributor=self.test_user_1,
             name="Cafe with ratings",
             description="Cafe created with over 2 decimal places",
             location="Sydenham",
             rating="4.39999"
         )
-        cafe = Cafe.objects.get(id=2)
+        cafe = Cafe.objects.get(name="Cafe with ratings")
         self.assertEqual(cafe.rating, Decimal('4.40'))
 
     def test_location_label(self):
@@ -87,20 +87,20 @@ class CafeTest(TestCase):
         self.assertEqual(field_label, 'location')
 
     def test_get_absolute_url(self):
-        self.assertEqual(self.cafe.get_absolute_url(), '/cafe/1')
+        self.assertEqual(self.cafe.get_absolute_url(), '/cafe/2')
 
     def test_dunder_str(self):
         """method: __str__"""
         str_representation = str(self.cafe)
-        self.assertEqual(str_representation, "Ziggy's Sydenham fred")
+        self.assertEqual(str_representation, "Ziggy's Sydenham test_user_1")
 
     def test_serialize(self):
         """Serialize to json"""
         cafe_serialized = self.cafe.serialize()
         self.assertDictEqual(cafe_serialized, {
-            'cafe_id': 1,
+            'cafe_id': 2,
             'name': "Ziggy's",
-            'contributor': 'fred',
+            'contributor': 'test_user_1',
             'description': 'Alas no longer',
             'rating': '3.40'
         })

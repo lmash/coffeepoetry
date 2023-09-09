@@ -2,6 +2,7 @@ from django.db.models import Sum
 from dotenv import load_dotenv
 import os
 import openai
+import random
 
 
 from .models import Cafe, CoffeeDescription, Review
@@ -18,17 +19,21 @@ def reduce_content(text: str) -> str:
     return "\n".join((lines[0], lines[1], lines[2]))
 
 
-def get_haiku(adjectives=None, cafe_description=None) -> str:
-    if not adjectives:
-        adjectives = """
+def get_haiku(cafe: str = None, coffee: str = None) -> str:
+    """
+        AI call to generate a haiku based on cafe and coffee descriptions provided
+        Returns haiku
+    """
+    if not coffee:
+        coffee = """
                     perfectly roasted bean
                     pretty latte art 
                     tasty
                     dark
         """
 
-    if not cafe_description:
-        cafe_description = """This is the best coffee in the area by far. The people are always friendly."""
+    if not cafe:
+        cafe = """This is the best coffee in the area by far. The people are always friendly."""
 
     chat_completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
@@ -37,9 +42,9 @@ def get_haiku(adjectives=None, cafe_description=None) -> str:
             Write a haiku about a speciality coffee cafe which is described below. The haiku should be visual and dreamy 
             with occasional scenic or color references. Never mention prices. 
     
-            Below: {adjectives}
+            Below: {coffee}
 
-            The cafe is described as: {cafe_description}
+            The cafe is described as: {cafe}
             
             A single 3 line haiku should be returned
             """
@@ -75,6 +80,28 @@ def add_cafe_for_poetry_generation(cafe):
     cafe = Cafe.objects.get(id=cafe.pk)
     cafe.check_for_haiku = True
     cafe.save()
+
+
+def cafe_eligible(cafe) -> bool:
+    """A café is only eligible if it has 3 or more CoffeeDescription rows"""
+    return CoffeeDescription.objects.filter(cafe=cafe.pk).count() >= 3
+
+
+def get_random_coffee_descriptions():
+    pass
+
+
+def get_cafe_and_coffee_descriptions(cafe) -> (str, str):
+    """
+    Get the records matching the cafe provided
+    Select 3 cafe descriptions randomly
+    Returns a tuple of 2 strings (cafe_descriptions, coffee_descriptions)
+    """
+    cafe_description = Cafe.objects.get(id=cafe.pk).description
+    if cafe_eligible():
+        coffee_descriptions = ""
+
+    return "", ""
 
 # poem = get_haiku()
 # print(poem)
