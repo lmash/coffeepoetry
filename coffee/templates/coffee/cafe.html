@@ -32,7 +32,7 @@
                     <a href="#" class="btn btn-light">Edit</a>
                     {% endif %}
                     <a href="#" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Review</a>
-                    {% include "coffee/includes/review.html" %}
+                    {% include "coffee/includes/review.html" with cafe=cafe%}
                 </div>
             </div>
         </div>
@@ -49,4 +49,5 @@
 </div>
 
 <script src="{% static 'coffee/cafe.js' %}"></script>
+<script src="{% static 'coffee/validation.js' %}"></script>
 {% endblock %}

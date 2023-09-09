@@ -85,10 +85,10 @@ class Review(models.Model):
         }
 
 
-class Adjective(models.Model):
+class CoffeeDescription(models.Model):
     cafe = models.ForeignKey(Cafe, on_delete=models.CASCADE)
     created_at = models.DateField(auto_now_add=True)
-    adjective = models.TextField(max_length=50)
+    description = models.TextField(max_length=250)
 
 
 class Poem(models.Model):

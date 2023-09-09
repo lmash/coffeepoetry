@@ -47,6 +47,5 @@ def get_haiku(adjectives=None, cafe_description=None) -> str:
     haiku = reduce_content(content)
     return haiku
 
-
-poem = get_haiku()
-print(poem)
+# poem = get_haiku()
+# print(poem)
