@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from django.db.models import Sum
 from dotenv import load_dotenv
 import os
@@ -11,6 +12,13 @@ from .models import Cafe, CoffeeDescription, Review, Poem
 # Load your API key from an environment variable or secret management service
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
+
+
+@dataclass
+class Haiku:
+    line_1: str
+    line_2: str
+    line_3: str
 
 
 def reduce_content(text: str) -> str:
@@ -106,14 +114,28 @@ def get_cafe_and_coffee_descriptions(cafe) -> (str, str):
     return cafe_description, coffee_descriptions
 
 
-def joining_the_dots():
+def joining_the_dots(cafe):
     """Iterate over poetry candidates, where eligible generate a haiku, save it and reset check_for_haiku to False"""
-    poetry_candidates = Cafe.objects.filter(check_for_haiku=True)
+    if not cafe_eligible(cafe):
+        cafe(check_for_haiku=False)
+        cafe.save()
+        return
 
-    for cafe in poetry_candidates:
-        if cafe_eligible(cafe):
-            cafe_description, coffee_descriptions = get_cafe_and_coffee_descriptions(cafe)
-            haiku = get_haiku(cafe=cafe_description, coffee=coffee_descriptions)
+    cafe_description, coffee_descriptions = get_cafe_and_coffee_descriptions(cafe)
+    haiku = get_haiku(cafe=cafe_description, coffee=coffee_descriptions)
 
-            poem = Poem(cafe=cafe, haiku=haiku, check_for_haiku=False)
-            poem.save()
+    poem = Poem(cafe=cafe, haiku=haiku)
+    poem.save()
+
+    cafe(check_for_haiku=False)
+    cafe.save()
+
+
+def get_haiku_lines(cafe) -> Haiku:
+    """Retuns the most recent haiku as 3 strings"""
+    try:
+        poem = Poem.objects.filter(cafe=cafe.id).latest('created_at')
+        lines = poem.haiku.split("\n")
+        return Haiku(line_1=lines[0], line_2=lines[1], line_3=lines[2])
+    except Poem.DoesNotExist:
+        return Haiku(line_1="", line_2="", line_3="")

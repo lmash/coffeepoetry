@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from . models import User, Cafe, Review, Image, CoffeeDescription
+from . models import User, Cafe, Review, Image, CoffeeDescription, Poem
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -28,4 +28,6 @@ admin.site.register(User, UserAdmin)
 admin.site.register(Cafe)
 admin.site.register(CoffeeDescription, CoffeeDescriptionAdmin)
 admin.site.register(Image)
+admin.site.register(Poem)
 admin.site.register(Review, ReviewAdmin)
+

@@ -53,6 +53,7 @@ class MyCafesView(ListView):
 def cafe_view(request, cafe_id):
 
     cafe = Cafe.objects.get(id=cafe_id)
+    haiku = utils.get_haiku_lines(cafe)
 
     images = (
         Image.objects
@@ -62,6 +63,7 @@ def cafe_view(request, cafe_id):
     return render(request, "coffee/cafe.html", context={
         "images": images,
         "cafe": cafe,
+        "haiku": haiku,
     })
 
 
@@ -167,6 +169,7 @@ def review_view(request, cafe_id):
         if data['coffee_description']:
             utils.update_coffee_description(cafe, data)
             utils.add_cafe_for_poetry_generation(cafe)
+            utils.joining_the_dots(cafe)
 
     return JsonResponse({'review': cafe.serialize()}, status=200)
 
