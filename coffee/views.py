@@ -30,12 +30,14 @@ class HomeView(ListView):
                     cafe_id=OuterRef('pk'))
                 .values('name')[:1]))
             .annotate(haiku=newest.values("haiku")[:1])
+            .annotate(inspiration=newest.values("inspiration")[:1])
         )
 
         # TODO Find better way to set Haiku from None to blank this is a workaround!
         for cafe in cafes:
             if cafe.haiku is None:
                 cafe.haiku = ""
+                cafe.inspiration = "The AI is uninspired"
 
         return cafes
 
@@ -57,12 +59,14 @@ class MyCafesView(ListView):
                     cafe_id=OuterRef('pk'))
                 .values('name')[:1]))
             .annotate(haiku=newest.values("haiku")[:1])
+            .annotate(inspiration=newest.values("inspiration")[:1])
         )
 
         # TODO Find better way to set Haiku from None to blank this is a workaround!
         for cafe in cafes:
             if cafe.haiku is None:
                 cafe.haiku = ""
+                cafe.inspiration = "The AI is uninspired"
 
         return cafes
 

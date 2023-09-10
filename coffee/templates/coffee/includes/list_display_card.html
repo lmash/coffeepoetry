@@ -7,15 +7,16 @@
                 <img class="card-img" src="{{ MEDIA_PREFIX }}{{ cafe.first_photo }}" alt="Cafe image">
             </div>
 
-            <div class="col-md-5">
+            <div class="col-md-4 d-flex align-items-center">
                 <div class="card-body">
-                    <h5 class="card-title"><a href="{% url 'cafe' cafe.pk %}">{{ cafe.name }}</a></h5>
+                    <h2 class="card-title"><a href="{% url 'cafe' cafe.pk %}">{{ cafe.name }}</a></h2>
                     <p>{{ cafe.location }}</p>
-                    <p class="card-text">{{ cafe.description|linebreaks }}</p>
+                    <span class="badge rounded-pill bg-dark" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                          title="{{ cafe.inspiration }}">Inspiration</span>
                 </div>
             </div>
 
-        <div class="col-md-3 d-flex align-items-center">
+        <div class="col-md-4 d-flex align-items-center">
             <div class="card-body haiku">
                 <div>{{ cafe.haiku }}</div>
             </div>

@@ -116,23 +116,24 @@ def get_cafe_and_coffee_descriptions(cafe) -> (str, str):
 
 def joining_the_dots(cafe):
     """Iterate over poetry candidates, where eligible generate a haiku, save it and reset check_for_haiku to False"""
+    Cafe.objects.filter(id=cafe.pk).update(check_for_haiku=False)
+
     if not cafe_eligible(cafe):
-        cafe(check_for_haiku=False)
-        cafe.save()
         return
 
     cafe_description, coffee_descriptions = get_cafe_and_coffee_descriptions(cafe)
     haiku = get_haiku(cafe=cafe_description, coffee=coffee_descriptions)
 
-    poem = Poem(cafe=cafe, haiku=haiku)
+    poem = Poem(
+        cafe=cafe,
+        haiku=haiku,
+        inspiration=coffee_descriptions
+    )
     poem.save()
-
-    cafe(check_for_haiku=False)
-    cafe.save()
 
 
 def get_haiku_lines(cafe) -> Haiku:
-    """Retuns the most recent haiku as 3 strings"""
+    """Returns the most recent haiku as 3 strings"""
     try:
         poem = Poem.objects.filter(cafe=cafe.id).latest('created_at')
         lines = poem.haiku.split("\n")
