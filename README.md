@@ -177,6 +177,7 @@ Python modules:
 | filename  | description                                                                                      |
 |-----------|--------------------------------------------------------------------------------------------------|
 | admin.py  | Classes for Model Administration. Entries allow  models to be updated via django admin           |
+| ai.py     | ???                                                                                              |
 | apps.py   | ???                                                                                              |
 | forms.py  | Classes for form entry                                                                           |
 | models.py | Model Classes. Has entries for the following models: User, Cafe, Image, Review, Adjective & Poem |
