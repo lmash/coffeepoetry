@@ -1,15 +1,12 @@
 # Coffee Poetry
-What does coffee evoke? 
-A website which allows one to add and review coffee shops, and then generates a poem 
-for a cafè based on its description and adjectives provided
-
-Only the user who created a cafè can edit it 
+The idea behind the website is for coffee to inspire poetry.
+The website allows one to add and review a café, and then generates a poem 
+based on the café and coffee descriptions provided.
 
 ## Poetry Generation
-- Each time a review description is entered the café is identified as a candidate for poetry generation
-- Generation runs as a separate process on a regular schedule (currently x minutes)
+- Poetry generation runs after each review is entered
 - Only cafés with an average rating of 4.2 or higher and 3 or more review descriptions can generate poetry
-- The AI uses a combination of the café and coffee descriptions (3 coffee descriptions are randomly selected) to generate the haiku
+- The AI uses a combination of the café and coffee descriptions (3 coffee descriptions are randomly selected) to generate a haiku
 
 ## Technologies
 
@@ -59,9 +56,10 @@ part of the website which is there to encourage users to return more frequently,
 cafès.
 
 The complexity comes from incorporating the review system along with the AI generation of a poem which will be 
-refreshed every time a cafè (which qualifies) text or adjectives change. The project also uses testing more than any of the 
+refreshed every time a cafè (which qualifies) coffee description changes. The project also uses testing more than any of the 
 previous projects - could put more here depending on test coverage obtained (perhaps a coverage html report?) 
 Images - Allow the uploading of multiple images. For additional complexity the site has been deployed and is available at www.?????.??? 
+Migrations also include data migrations as initial data
 
 ### File structure
 

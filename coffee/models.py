@@ -96,3 +96,6 @@ class Poem(models.Model):
     cafe = models.ForeignKey(Cafe, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     haiku = models.TextField()
+    inspiration_1 = models.ForeignKey(CoffeeDescription, on_delete=models.CASCADE, related_name='inspiration_1')
+    inspiration_2 = models.ForeignKey(CoffeeDescription, on_delete=models.CASCADE, related_name='inspiration_2')
+    inspiration_3 = models.ForeignKey(CoffeeDescription, on_delete=models.CASCADE, related_name='inspiration_3')
