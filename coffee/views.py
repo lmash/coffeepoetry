@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
-from django.db.models import OuterRef, Subquery
+from django.db.models import OuterRef, Subquery, Exists
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
@@ -29,8 +29,13 @@ class HomeView(ListView):
                 Image.objects.filter(
                     cafe_id=OuterRef('pk'))
                 .values('name')[:1]))
-            .annotate(haiku=Subquery(newest.values("haiku")[:1]))
+            .annotate(haiku=newest.values("haiku")[:1])
         )
+
+        # TODO Find better way to set Haiku from None to blank this is a workaround!
+        for cafe in cafes:
+            if cafe.haiku is None:
+                cafe.haiku = ""
 
         return cafes
 
@@ -41,6 +46,8 @@ class MyCafesView(ListView):
     template_name = "coffee/my_cafes.html"
 
     def get_queryset(self):
+        newest = Poem.objects.filter(cafe=OuterRef("pk")).order_by("-created_at")
+
         cafes = (
             Cafe.objects                            # Get Cafe's
             .filter(contributor=self.request.user)  # Filter by logged in user
@@ -49,7 +56,13 @@ class MyCafesView(ListView):
                 Image.objects.filter(
                     cafe_id=OuterRef('pk'))
                 .values('name')[:1]))
+            .annotate(haiku=newest.values("haiku")[:1])
         )
+
+        # TODO Find better way to set Haiku from None to blank this is a workaround!
+        for cafe in cafes:
+            if cafe.haiku is None:
+                cafe.haiku = ""
 
         return cafes
 
