@@ -110,7 +110,36 @@ function update_stars_text(num_stars, stars_element) {
             coffee_description: coffee_description
         })
     })
+        .then(response => response.json())
+        .then(data => {
+            reset_after_save(data);
+        })
         .catch(error => {
             console.log('Error:', error);
         });
+  }
+
+  function reset_after_save(data) {
+    // Refresh the star rating and reset the review criteria and description
+    get_rating()
+    reset_review()
+  }
+
+  function reset_review() {
+    const outputCriteria = document.querySelectorAll('output');
+
+    // Reset criteria slider component to default of 4
+    const reviewRanges = document.querySelectorAll('input[type=range]');
+    reviewRanges.forEach(range => {
+        range.value = "4";
+    })    
+
+    // Reset criteria output component to default of 4
+    outputCriteria.forEach(output => {
+        output.innerText = "4";
+    })
+
+    // Reset description text to empty
+    const coffeeDescription = document.getElementById('coffeeDescription');
+    coffeeDescription.value = '';
   }
