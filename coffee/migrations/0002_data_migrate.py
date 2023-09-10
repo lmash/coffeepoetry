@@ -54,6 +54,11 @@ def populate_cafes(apps, schema_editor):
         location='Sydenham'
     ).save()
 
+    Image(
+        cafe=Cafe.objects.get(name=alexandra_nurseries),
+        name='images/IMG_3660_shopfront.jpeg'
+    ).save()
+
     penge_general = 'Penge General Store'
     Cafe(
         contributor=User.objects.get(username='Nancy'),
@@ -71,6 +76,11 @@ def populate_cafes(apps, schema_editor):
     Image(
         cafe=Cafe.objects.get(name=penge_general),
         name='images/IMG_3656.jpeg'
+    ).save()
+
+    Image(
+        cafe=Cafe.objects.get(name=penge_general),
+        name='images/IMG_3659.jpeg'
     ).save()
 
     four_boroughs = 'Four Boroughs'

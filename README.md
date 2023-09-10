@@ -1,14 +1,16 @@
 # Coffee Poetry
 The idea behind the website is for coffee to inspire poetry.
-The website allows one to add and review a café, and then generates a poem 
+The website allows one to add and review a café, and then AI generates a poem 
 based on the café and coffee descriptions provided.
 
-## Poetry Generation
+## Poetry Generation Explained
 - Poetry generation runs after each review is entered
 - Only cafés with an average rating of 4.2 or higher and 3 or more review descriptions can generate poetry
 - The AI uses a combination of the café and coffee descriptions (3 coffee descriptions are randomly selected) to generate a haiku
 
 ## Technologies
+HTML, Bootstrap, CSS, Javascript, Python, Django Framework
+
 
 ### Setup Pre-Requisite
 To enable poetry generation requires an API key from OpenAI. The website will work without the key
@@ -52,14 +54,43 @@ pip install -r requirements.txt
 ## Distinctiveness and Complexity
 The website is distinctive as it's main use is to review and advertise speciality cafès.
 This is done using a traditional review system, along with a creative component - the Poetry generation 
-part of the website which is there to encourage users to return more frequently, and is only available for the highest rated 
+part of the website which is there to encourage users to return more frequently, and is only available for highly rated 
 cafès.
 
 The complexity comes from incorporating the review system along with the AI generation of a poem which will be 
 refreshed every time a cafè (which qualifies) coffee description changes. The project also uses testing more than any of the 
 previous projects - could put more here depending on test coverage obtained (perhaps a coverage html report?) 
 Images - Allow the uploading of multiple images. For additional complexity the site has been deployed and is available at www.?????.??? 
-Migrations also include data migrations as initial data
+Migrations also include data migrations as initial data.
+
+### Page Descriptions
+## Register
+A page to create new accounts.Has validation to ensure the user being created in unique, 
+all fields are populated and the passwords entered match.
+
+## Login
+User must enter username and password to login (once they've registered). Has validation to ensure
+username and password entered match an existing account.
+
+## Home
+Displays all cafe's ordered by review score, with the highest appearing first. Anyone (logged in/not) can see the same detail.
+Shows the first image loaded against a café, the café name, location and a haiku and it's inspiration if one has been generated. Hover over inspiration to see.
+Clicking on a cafés name displays the cafés page.
+
+## <Usernames> Cafés
+Displays all cafés created by the user logged in, ordered by review score, with the highest appearing first. 
+Clicking on a cafés name displays the cafés page.
+
+## New Cafe
+Allows a logged in user to create a café. Name, location, description and at least one image are mandatory.
+
+## Café
+Displays a single cafe with a carousel of images, cafe name, location, description and rating.
+Users logged in can review a cafe by clicking the Review button. The user who created the Café
+can edit the description and add more images.
+
+Clicking on the Review button displays a review window, the user can then rate the café using 5 criteria.
+The user can also describe the coffee.
 
 ### File structure
 
