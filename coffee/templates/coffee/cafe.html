@@ -25,7 +25,7 @@
                 </div>
 
                 <p>{{ cafe.location }}</p>
-                <p class="card-text">{{ cafe.description }}</p>
+                <p class="card-text">{{ cafe.description|linebreaks }}</p>
                 <div class="flex d-flex justify-content-between">
                     <div></div>
                     {% if request.user == cafe.contributor %}

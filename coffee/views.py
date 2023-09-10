@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
-from django.db.models import OuterRef, Subquery, Exists
+from django.db.models import OuterRef, Subquery
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
