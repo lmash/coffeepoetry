@@ -8,7 +8,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import ListView
 import json
 
-from .models import Cafe, User, Image, Review
+from .models import Cafe, User, Image, Review, Poem
 from .forms import CafeForm
 from coffee import utils
 
@@ -18,6 +18,9 @@ class HomeView(ListView):
     template_name = "coffee/index.html"
 
     def get_queryset(self):
+        # Get the newest poem per cafe
+        newest = Poem.objects.filter(cafe=OuterRef("pk")).order_by("-created_at")
+
         cafes = (
             Cafe.objects
             .all()                                  # Get all Cafe's
@@ -26,6 +29,7 @@ class HomeView(ListView):
                 Image.objects.filter(
                     cafe_id=OuterRef('pk'))
                 .values('name')[:1]))
+            .annotate(haiku=Subquery(newest.values("haiku")[:1]))
         )
 
         return cafes
