@@ -5,7 +5,7 @@ import os
 import openai
 import random
 
-
+from .config import sayings
 from .models import Cafe, CoffeeDescription, Review, Poem
 
 
@@ -140,3 +140,13 @@ def get_haiku_lines(cafe) -> Haiku:
         return Haiku(line_1=lines[0], line_2=lines[1], line_3=lines[2])
     except Poem.DoesNotExist:
         return Haiku(line_1="", line_2="", line_3="")
+
+
+def default_missing_inspiration(cafes):
+    """"Get inspiration from list of sayings if missing"""
+    for cafe in cafes:
+        if cafe.haiku is None:
+            cafe.haiku = ""
+            cafe.inspiration = random.choice(sayings)
+
+    return cafes

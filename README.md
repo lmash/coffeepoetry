@@ -5,12 +5,11 @@ based on the café and coffee descriptions provided.
 
 ## Poetry Generation Explained
 - Poetry generation runs after each review is entered
-- Only cafés with an average rating of 4.2 or higher and 3 or more review descriptions can generate poetry
+- Only cafés with an average rating of 4 or higher and 3 or more review descriptions can generate poetry
 - The AI uses a combination of the café and coffee descriptions (3 coffee descriptions are randomly selected) to generate a haiku
 
 ## Technologies
-HTML, Bootstrap, CSS, Javascript, Python, Django Framework
-
+HTML, Bootstrap, CSS, Javascript, Python, Django Framework, OpenAI
 
 ### Setup Pre-Requisite
 To enable poetry generation requires an API key from OpenAI. The website will work without the key
@@ -91,6 +90,9 @@ can edit the description and add more images.
 
 Clicking on the Review button displays a review window, the user can then rate the café using 5 criteria.
 The user can also describe the coffee.
+
+## Poetry
+Displays all poems generated.
 
 ### File structure
 

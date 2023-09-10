@@ -33,12 +33,7 @@ class HomeView(ListView):
             .annotate(inspiration=newest.values("inspiration")[:1])
         )
 
-        # TODO Find better way to set Haiku from None to blank this is a workaround!
-        for cafe in cafes:
-            if cafe.haiku is None:
-                cafe.haiku = ""
-                cafe.inspiration = "The AI is uninspired"
-
+        cafes = utils.default_missing_inspiration(cafes)
         return cafes
 
 
@@ -62,12 +57,7 @@ class MyCafesView(ListView):
             .annotate(inspiration=newest.values("inspiration")[:1])
         )
 
-        # TODO Find better way to set Haiku from None to blank this is a workaround!
-        for cafe in cafes:
-            if cafe.haiku is None:
-                cafe.haiku = ""
-                cafe.inspiration = "The AI is uninspired"
-
+        cafes = utils.default_missing_inspiration(cafes)
         return cafes
 
 
