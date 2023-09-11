@@ -113,6 +113,7 @@ function update_stars_text(num_stars, stars_element) {
         .then(response => response.json())
         .then(data => {
             reset_after_save(data);
+            display_haiku();
         })
         .catch(error => {
             console.log('Error:', error);
@@ -143,3 +144,24 @@ function update_stars_text(num_stars, stars_element) {
     const coffeeDescription = document.getElementById('coffeeDescription');
     coffeeDescription.value = '';
   }
+
+  function display_haiku() {
+    // Redisplay the haiku
+    const cafe_id = document.getElementById(`cafeId`).value;
+    
+    fetch(`/haiku/${cafe_id}`)
+    .then(response => response.json(
+        console.log(response)
+    ))
+    .then(data => {
+        const line_1 = document.getElementById('haikuLine1');
+        const line_2 = document.getElementById('haikuLine2');
+        const line_3 = document.getElementById('haikuLine3');
+        line_1.innerText = data['line_1'];
+        line_2.innerText = data['line_2'];
+        line_3.innerText = data['line_3'];
+    })
+    .catch(error => {
+        console.log('Error:', error);
+    });    
+}

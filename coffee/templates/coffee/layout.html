@@ -19,13 +19,10 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light navbar-additional container-fluid">
-    <a class="navbar-brand" href="#">CoffeePoetry</a>
+    <a class="navbar-brand" href="{% url 'index' %}">CoffeePoetry</a>
 
     <div>
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'index' %}">Home</a>
-            </li>
             {% if user.is_authenticated %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'my_cafes' %}">{{ request.user|title }}'s Cafés</a>

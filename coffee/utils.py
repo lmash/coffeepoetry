@@ -1,5 +1,6 @@
-from dataclasses import dataclass
+import dataclasses
 from django.db.models import Sum
+import json
 import random
 
 from coffee.ai import get_haiku
@@ -7,7 +8,7 @@ from .config import sayings
 from .models import Cafe, CoffeeDescription, Review, Poem
 
 
-@dataclass
+@dataclasses.dataclass
 class Haiku:
     line_1: str
     line_2: str

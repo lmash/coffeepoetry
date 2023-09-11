@@ -53,7 +53,7 @@ pip install -r requirements.txt
 ## Distinctiveness and Complexity
 The website is distinctive as it's main use is to review and advertise speciality cafès.
 This is done using a traditional review system, along with a creative component - the Poetry generation 
-part of the website which is there to encourage users to return more frequently, and is only available for highly rated 
+part of the website which is there to encourage users to return and review frequently, and is only available for highly rated 
 cafès.
 
 The complexity comes from incorporating the review system along with the AI generation of a poem which will be 
@@ -71,7 +71,7 @@ all fields are populated and the passwords entered match.
 User must enter username and password to login (once they've registered). Has validation to ensure
 username and password entered match an existing account.
 
-## Home
+## CoffeePoetry
 Displays all cafe's ordered by review score, with the highest appearing first. Anyone (logged in/not) can see the same detail.
 Shows the first image loaded against a café, the café name, location and a haiku and it's inspiration if one has been generated. Hover over inspiration to see.
 Clicking on a cafés name displays the cafés page.
@@ -89,60 +89,12 @@ Users logged in can review a cafe by clicking the Review button. The user who cr
 can edit the description and add more images.
 
 Clicking on the Review button displays a review window, the user can then rate the café using 5 criteria.
-The user can also describe the coffee.
+The user can also describe the coffee. After a review is saved the review (stars display) is updated, review criteria are reset 
+and the poem is refreshed.
 
 ## Poetry
 Displays all poems generated.
 
-### File structure
-
-```
-├── README.md
-├── capstone
-│   ├── asgi.py
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
-├── coffee
-│   ├── admin.py
-│   ├── apps.py
-│   ├── forms.py
-│   ├── migrations
-│   ├── models.py
-│   ├── static
-│   │   └── coffee
-│   │       ├── cafe.js
-│   │       ├── styles.css
-│   │       └── validation.js
-│   ├── templates
-│   │   └── coffee
-│   │       ├── cafe.html
-│   │       ├── includes
-│   │       │   ├── list_display_card.html
-│   │       │   ├── review.html
-│   │       │   └── star_rating.html
-│   │       ├── index.html
-│   │       ├── layout.html
-│   │       ├── login.html
-│   │       ├── my_cafes.html
-│   │       ├── new.html
-│   │       ├── poetry.html
-│   │       └── register.html
-│   ├── tests
-│   │   ├── __init__.py
-│   │   ├── test_forms.py
-│   │   ├── test_models.py
-│   │   ├── test_utils.py
-│   │   └── test_views.py
-│   ├── urls.py
-│   ├── utils.py
-│   └── views.py
-├── manage.py
-├── media
-│   └── images
-│       ├── Hamad_Darwish_Wallpapers_-1.jpg
-└── requirements.txt
-```
 ## Description of files
 
 Non-Python files:

@@ -188,3 +188,9 @@ def review_view(request, cafe_id):
 def rating_view(request, cafe_id):
     cafe = Cafe.objects.get(id=cafe_id)
     return JsonResponse({'rating': cafe.rating}, status=200)
+
+
+def haiku_view(request, cafe_id):
+    cafe = Cafe.objects.get(id=cafe_id)
+    haiku = utils.get_haiku_lines(cafe)
+    return JsonResponse({'line_1': haiku.line_1, 'line_2': haiku.line_2, 'line_3': haiku.line_3}, status=200)
