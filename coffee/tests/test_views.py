@@ -46,6 +46,6 @@ class IndexViewTest(TestCase):
         response = self.client.get(reverse('index'))
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, "coffee/index.html")
-        self.assertContains(response, f'<a class="nav-link" href="{reverse("index")}">Home</a>')
+        self.assertContains(response, f'<a class="navbar-brand" href="{reverse("index")}">CoffeePoetry</a>')
         self.assertContains(response, f'<a class="nav-link" href="{reverse("login")}">Log In</a>')
         self.assertContains(response, f'<a class="nav-link" href="{reverse("register")}">Register</a>')

@@ -1,5 +1,3 @@
-from dataclasses import dataclass
-
 from dotenv import load_dotenv
 import openai
 import os
@@ -8,11 +6,6 @@ import os
 # Load your API key from an environment variable or secret management service
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
-
-
-@dataclass
-class Personality:
-    pass
 
 
 def reduce_content(text: str) -> str:
