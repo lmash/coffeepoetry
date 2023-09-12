@@ -4,10 +4,13 @@
 {% block body %}
 <div id="cafe-view" class="container">
     <div class="flex-item">
+        <div class="d-flex justify-content-center">
         <h2>Café</h2>
         <input type="hidden" id="cafeId" name="cafeId" value="{{ cafe.id }}" />
+        </div>
 
-        <div class="card" style="width: auto;">
+        <div class="card d-flex align-items-center border-0" style="background-color: #f6ebd8;">
+        <div class="card d-flex w-75 p-3">
             <div id="carouselExampleSlidesOnly" class="card-img-top carousel slide carousel-fade"
                  data-bs-ride="carousel">
                 <div class="carousel-inner">
@@ -38,6 +41,7 @@
                     {% endif %}
                 </div>
             </div>
+        </div>
         </div>
 
         <div class="card d-flex align-items-center border-0" style="width: auto; background-color: #f6ebd8;">
