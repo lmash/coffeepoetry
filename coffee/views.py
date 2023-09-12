@@ -194,3 +194,23 @@ def haiku_view(request, cafe_id):
     cafe = Cafe.objects.get(id=cafe_id)
     haiku = utils.get_haiku_lines(cafe)
     return JsonResponse({'line_1': haiku.line_1, 'line_2': haiku.line_2, 'line_3': haiku.line_3}, status=200)
+
+
+@login_required(login_url='login')
+def save_edited_view(request, cafe_id):
+    cafe = Cafe.objects.get(id=cafe_id)
+
+    if request.method == "PUT":
+        data = json.loads(request.body)
+        cafe.description = data['text']
+        cafe.save()
+
+        images = request.FILES.getlist('images')
+
+        for image in images:
+            Image.objects.create(
+                cafe=cafe,
+                name=image
+            )
+
+    return JsonResponse({'description': cafe.description}, status=200)

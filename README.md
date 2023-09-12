@@ -99,14 +99,14 @@ Displays all poems generated.
 
 Non-Python files:
 
-| filename             | description                                                                                                                              |
-|----------------------|------------------------------------------------------------------------------------------------------------------------------------------|
-| README.md            | Text file (markdown format) description of the project.                                                                                  |
-| requirements.txt     | Text file of packages to be installed by pip.                                                                                            |
-| .env.example         | Text file for API keys to be populated and renamed.                                                                                      |
-| coffee/cafe.js       | Javascript file. Contains most of the review logic and listeners for events. Updates stars and ratings and re displays them after saving |
-| coffee/styles.css    | Css file with shared styling for the project.                                                                                            |
-| coffee/validation.js | Javascript file to apply form validation                                                                                                 |
+| filename             | description                                                                                                                                                               |
+|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| README.md            | Text file (markdown format) description of the project.                                                                                                                   |
+| requirements.txt     | Text file of packages to be installed by pip.                                                                                                                             |
+| .env.example         | Text file for API keys to be populated and renamed.                                                                                                                       |
+| coffee/cafe.js       | Javascript file. Contains most of the review and edit logic. Updates stars and ratings and re displays them after saving. <br/>Displays changed description after saving. |
+| coffee/styles.css    | Css file with shared styling for the project.                                                                                                                             |
+| coffee/validation.js | Javascript file to apply form validation                                                                                                                                  |
 
 HTML files in the templates/coffee folder:
 

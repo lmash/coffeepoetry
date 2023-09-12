@@ -28,6 +28,12 @@ document.addEventListener('DOMContentLoaded', function () {
     saveButton.addEventListener('click', event => {
         save_review(event);
     })
+
+    // Add event listener to Edit Button in Modal
+    const editButton = document.querySelector('.save-edit');
+    editButton.addEventListener('click', event => {
+        save_edit(event);
+    })    
 })
 
 function get_rating() {
@@ -165,3 +171,50 @@ function update_stars_text(num_stars, stars_element) {
         console.log('Error:', error);
     });    
 }
+
+function save_edit(event) {
+    // Save cafe description and images
+    event.preventDefault();
+    const csrftoken = Cookies.get('csrftoken');
+    const cafe_id = document.getElementById(`cafeId`).value;
+    const text = document.getElementById('descriptionText').value
+
+
+    fetch(`/save_edit/${cafe_id}`, {
+        credentials: 'include',
+        method: 'PUT',
+        mode: 'same-origin',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+        },
+        body: JSON.stringify({
+            text: text
+        })
+    })
+        .then(response => response.json())
+        .then(data => {
+            refresh_description(data['description']);
+        })        
+        .catch(error => {
+            console.log('Error:', error);
+        });
+  }
+
+  function refresh_description(text) {
+    // Refreshes description in the cafe page to match the one saved after editing
+    current_text = document.getElementById('cardTextDescription').parentNode.children[3];
+    const haikuLines = text.split("\n");
+    const replacement_p = document.createElement('p');
+
+    haikuLines.forEach(line => {
+        replacement_p.innerHTML += line + "<br />";
+    })    
+
+    // Remove final line break
+    last_line_break = replacement_p.lastChild;
+    last_line_break.remove();
+
+    current_text.replaceWith(replacement_p);
+  }

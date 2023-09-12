@@ -25,11 +25,12 @@
                 </div>
 
                 <p>{{ cafe.location }}</p>
-                <p class="card-text">{{ cafe.description|linebreaks }}</p>
+                <p class="card-text" id="cardTextDescription">{{ cafe.description|linebreaks }}</p>
                 <div class="flex d-flex justify-content-between">
                     <div></div>
                     {% if request.user == cafe.contributor %}
-                    <a href="#" class="btn btn-light">Edit</a>
+                    <a href="#" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#editBackdrop">Edit</a>
+                    {% include "coffee/includes/edit.html" with cafe=cafe%}
                     {% endif %}
                     {% if user.is_authenticated %}
                     <a href="#" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Review</a>

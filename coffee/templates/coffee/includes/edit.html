@@ -1,0 +1,27 @@
+<div class="modal fade" id="editBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="editBackdropLabel" aria-hidden="true" enctype="multipart/form-data">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editBackdropLabel">Edit {{ cafe.name }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="descriptionText" class="form-label">Description</label>
+                <textarea class="form-control" id="descriptionText" rows="5">{{ cafe.description }}</textarea>
+            </div>
+            <div class="modal-body">
+                <form method="put" enctype="multipart/form-data">
+                    <label class="form-label">Images</label>
+                    <div>
+                        <input name="images" type="file" multiple class="form-control-file">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer flex d-flex justify-content-between">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary save-edit" data-bs-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
