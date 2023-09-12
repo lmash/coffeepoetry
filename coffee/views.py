@@ -214,3 +214,15 @@ def save_edited_view(request, cafe_id):
             )
 
     return JsonResponse({'description': cafe.description}, status=200)
+
+
+def poetry_view(request, cafe_id):
+    cafe = Cafe.objects.get(id=cafe_id)
+    poems = Poem.objects.filter(cafe=cafe).order_by('-created_at').values(
+        'created_at', 'haiku', 'inspiration', 'cafe__name', 'cafe__location'
+    )
+
+    return render(request, "coffee/poetry.html", context={
+        "cafe": cafe,
+        "poems": poems,
+    })

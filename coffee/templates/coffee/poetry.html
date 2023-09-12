@@ -1,8 +1,18 @@
-The below can be displayed using a bootstrap Modal
+{% extends "coffee/layout.html" %}
+{% load static %}
 
-       Excellence begets creativity.
+{% block body %}
+<div id="poetry-view" class="container">
+    <div class="flex-item">
+        <div class="d-flex justify-content-center">
+            <h2>{{ cafe.name }} Poems</h2>
+        </div>
+        {% for poem in poems %}
 
-       A cafe needs to have a rating of 4.1 or higher and have 3 coffee descriptions entered
-       to generate a poem
+        {% include "coffee/includes/poem_display_card.html" with poem=poem %}
 
-Retained Poetry link to show historical haiku's
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

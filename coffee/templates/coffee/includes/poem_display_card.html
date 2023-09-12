@@ -1,0 +1,19 @@
+{% load static %}
+
+<div class="card mb-3 text-left border-2">
+    <div class="row no-gutters">
+            <div class="card-body col-md-4 haiku">
+                <div>{{ poem.haiku|linebreaks }}</div>
+            </div>
+
+            <div class="card-body col-md-4">
+                <h6 class="card-title">Inspired by</h6>
+                <div>{{ poem.inspiration }}</div>
+            </div>
+
+        <div class="card-body col-md-2">
+            <h6 class="card-title">Created on</h6>
+            <div>{{ poem.created_at|date:'d M Y H:i' }}</div>
+        </div>
+    </div>
+</div>

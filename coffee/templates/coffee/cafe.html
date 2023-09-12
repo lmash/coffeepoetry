@@ -30,7 +30,7 @@
                 <p>{{ cafe.location }}</p>
                 <p class="card-text" id="cardTextDescription">{{ cafe.description|linebreaks }}</p>
                 <div class="flex d-flex justify-content-between">
-                    <div></div>
+                    <a href="{% url 'poetry' cafe.id %}">Poems</a>
                     {% if request.user == cafe.contributor %}
                     <a href="#" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#editBackdrop">Edit</a>
                     {% include "coffee/includes/edit.html" with cafe=cafe%}
@@ -51,7 +51,6 @@
                 <div id="haikuLine3">{{ haiku.line_3 }}</div>
             </div>
         </div>
-
     </div>
 </div>
 
