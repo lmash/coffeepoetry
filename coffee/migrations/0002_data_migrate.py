@@ -83,6 +83,11 @@ def populate_cafes(apps, schema_editor):
         name='images/IMG_3659.jpeg'
     ).save()
 
+    Image(
+        cafe=Cafe.objects.get(name=penge_general),
+        name='images/IMG_3681.jpeg'
+    ).save()
+
     four_boroughs = 'Four Boroughs'
     Cafe(
         contributor=User.objects.get(username='Nancy'),

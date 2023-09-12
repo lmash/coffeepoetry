@@ -173,12 +173,11 @@ function update_stars_text(num_stars, stars_element) {
 }
 
 function save_edit(event) {
-    // Save cafe description and images
+    // Save cafe description
     event.preventDefault();
     const csrftoken = Cookies.get('csrftoken');
     const cafe_id = document.getElementById(`cafeId`).value;
     const text = document.getElementById('descriptionText').value
-
 
     fetch(`/save_edit/${cafe_id}`, {
         credentials: 'include',
@@ -200,6 +199,35 @@ function save_edit(event) {
         .catch(error => {
             console.log('Error:', error);
         });
+
+        save_additional_images(event, csrftoken)
+  }
+
+  function save_additional_images(event, csrftoken) {
+    // Save cafe images   
+    // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#uploading_multiple_files 
+    const cafe_id = document.getElementById(`cafeId`).value;
+    const photos = document.querySelector('input[type="file"][multiple]');
+    const formData = new FormData();
+
+    for (const [i, photo] of Array.from(photos.files).entries()) {
+        formData.append(`images_${i}`, photo);
+      }   
+
+      fetch(`/save_edit/${cafe_id}`, {
+        credentials: 'include',
+        method: 'POST',
+        mode: 'same-origin',
+        headers: {
+            'X-CSRFToken': csrftoken
+        },
+        body: formData,
+    })
+        .then(response => response.json())
+        .catch(error => {
+            console.log('Error:', error);
+        });
+      
   }
 
   function refresh_description(text) {

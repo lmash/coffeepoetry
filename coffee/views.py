@@ -205,7 +205,8 @@ def save_edited_view(request, cafe_id):
         cafe.description = data['text']
         cafe.save()
 
-        images = request.FILES.getlist('images')
+    if request.method == "POST":
+        images = request.FILES.values()
 
         for image in images:
             Image.objects.create(
