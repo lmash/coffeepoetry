@@ -82,6 +82,7 @@ Clicking on a cafés name displays the cafés page.
 
 ## New Cafe
 Allows a logged in user to create a café. Name, location, description and at least one image are mandatory.
+The first image added will be displayed on all list pages for the cafe.
 
 ## Café
 Displays a single cafe with a carousel of images, cafe name, location, description and rating.
@@ -92,8 +93,10 @@ Clicking on the Review button displays a review window, the user can then rate t
 The user can also describe the coffee. After a review is saved the review (stars display) is updated, review criteria are reset 
 and the poem is refreshed.
 
-## Poetry
-Displays all poems generated.
+A Poems link can also be clicked to display all poems.
+
+## Poems
+Displays all poems generated for a cafe, along with their inspiration and date created. Ordered by most recently created.
 
 ## Description of files
 
@@ -131,6 +134,7 @@ Python modules:
 | admin.py  | Classes for Model Administration. Entries allow  models to be updated via django admin           |
 | ai.py     | ???                                                                                              |
 | apps.py   | ???                                                                                              |
+| config.py | ???                                                                                              |
 | forms.py  | Classes for form entry                                                                           |
 | models.py | Model Classes. Has entries for the following models: User, Cafe, Image, Review, Adjective & Poem |
 | urls.py   | ???                                                                                              |

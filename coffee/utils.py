@@ -1,11 +1,20 @@
 import dataclasses
 from django.db.models import Sum
-import json
 import random
 
 from coffee.ai import get_haiku
-from .config import sayings
 from .models import Cafe, CoffeeDescription, Review, Poem
+
+
+sayings = [
+    'The AI is uninspired',
+    'Excellence begets creativity',
+    'Perhaps being more detailed would help',
+    "I won't get out of bed for anything less than 4 stars",
+    'A wise man said...',
+    'The AI is not inspired',
+    'zzzzzzzzzzz',
+]
 
 
 @dataclasses.dataclass
