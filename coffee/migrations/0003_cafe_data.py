@@ -10,7 +10,7 @@ def populate_cafes(apps, schema_editor):
 
     kaffeine = 'Kaffeine'
     Cafe(
-        contributor=User.objects.get(username='Fred'),
+        contributor=User.objects.get(username='Judy'),
         name=kaffeine,
         description='Open since 2009 and still regarded as a leading benchmark setting cafe'
                     'of the London speciality coffee industry\n'
@@ -35,7 +35,7 @@ def populate_cafes(apps, schema_editor):
 
     dukes_caffe = "Duke's Cafe"
     Cafe(
-        contributor=User.objects.get(username='Fred'),
+        contributor=User.objects.get(username='Judy'),
         name=dukes_caffe,
         description='A third generation family-run business that is passionate about serving quality food and coffee\n'
                     'to customers in the West End.',

@@ -28,7 +28,7 @@ class UtilsTest(TestCase):
             name="Ziggy's",
             description="Alas no longer",
             location="Sydenham",
-            rating=3.4,
+            rating=4.4,
             check_for_haiku=True
         )
 
@@ -48,7 +48,7 @@ class UtilsTest(TestCase):
             description='Roasted'
         )
 
-    def test_cafe_eligible_where_3_descriptions_exist(self):
+    def test_cafe_eligible_where_3_descriptions_exist_and_rating_higher_than_4(self):
         assert utils.cafe_eligible(self.cafe) is True
 
     def test_cafe_not_eligible_when_no_descriptions(self):
@@ -57,6 +57,28 @@ class UtilsTest(TestCase):
             name="Test Cafe",
             description="Test Cafe",
             location="",
+        )
+        assert utils.cafe_eligible(cafe) is False
+
+    def test_cafe_not_eligible_when_3_descriptions_and_rating_less_than_4(self):
+        cafe = Cafe.objects.create(
+            contributor=self.test_user_1,
+            name="Test Cafe",
+            description="Test Cafe",
+            location="Somewhere",
+            rating=3.9,
+        )
+        CoffeeDescription.objects.create(
+            cafe=cafe,
+            description='Smooth and mellow with hints of orange'
+        )
+        CoffeeDescription.objects.create(
+            cafe=cafe,
+            description='Bubbly and truly delicious.. invigorating'
+        )
+        CoffeeDescription.objects.create(
+            cafe=cafe,
+            description='Roasted'
         )
         assert utils.cafe_eligible(cafe) is False
 

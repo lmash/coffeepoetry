@@ -52,6 +52,31 @@ def populate_cafes(apps, schema_editor):
         name='images/IMG_3660_shopfront.jpeg'
     ).save()
 
+    Image(
+        cafe=Cafe.objects.get(name=alexandra_nurseries),
+        name='images/IMG_3684.jpeg'
+    ).save()
+
+    Image(
+        cafe=Cafe.objects.get(name=alexandra_nurseries),
+        name='images/IMG_3686.jpeg'
+    ).save()
+
+    Image(
+        cafe=Cafe.objects.get(name=alexandra_nurseries),
+        name='images/IMG_3687.jpeg'
+    ).save()
+
+    Image(
+        cafe=Cafe.objects.get(name=alexandra_nurseries),
+        name='images/IMG_3688.jpeg'
+    ).save()
+
+    Image(
+        cafe=Cafe.objects.get(name=alexandra_nurseries),
+        name='images/IMG_3689.jpeg'
+    ).save()
+
     penge_general = 'Penge General Store'
     Cafe(
         contributor=User.objects.get(username='Judy'),

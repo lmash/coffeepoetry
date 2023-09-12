@@ -25,9 +25,9 @@ class Haiku:
 
 
 def update_cafe_rating(cafe):
+    """Calculate the cafe rating as the average of scores"""
     total = (Review.objects.all().filter(cafe=cafe).aggregate(Sum('score')))
     num_reviews = (Review.objects.all().filter(cafe=cafe).count())
-
     cafe.rating = total['score__sum']/num_reviews
     cafe.save()
 
