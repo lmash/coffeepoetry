@@ -7,17 +7,10 @@ from django.db import migrations
 def populate_users(apps, schema_editor):
     User = apps.get_model("coffee", "User")
     User(
-        username='Fred',
-        password=make_password('fred'),
+        username='Judy',
+        password=make_password('judy'),
         email='someone@yahoo.com',
-        slug='fred',
-    ).save()
-
-    User(
-        username='Nancy',
-        password=make_password('nancy'),
-        email='someone@yahoo.com',
-        slug='nancy',
+        slug='judy',
     ).save()
 
 
@@ -28,7 +21,7 @@ def populate_cafes(apps, schema_editor):
 
     no_41_coffee = 'No. 41 Coffee'
     Cafe(
-        contributor=User.objects.get(username='Fred'),
+        contributor=User.objects.get(username='Judy'),
         name=no_41_coffee,
         description='Trendy and newly refurbished\nFriendly atmosphere',
         location='Forest Hill'
@@ -46,7 +39,7 @@ def populate_cafes(apps, schema_editor):
 
     alexandra_nurseries = 'Alexandra Nurseries'
     Cafe(
-        contributor=User.objects.get(username='Fred'),
+        contributor=User.objects.get(username='Judy'),
         name=alexandra_nurseries,
         description='Romantic garden centre with outdoor seating amongst the plants and shrubs\n'
                     'Friendly family run business\n'
@@ -61,7 +54,7 @@ def populate_cafes(apps, schema_editor):
 
     penge_general = 'Penge General Store'
     Cafe(
-        contributor=User.objects.get(username='Nancy'),
+        contributor=User.objects.get(username='Judy'),
         name=penge_general,
         description='Trendy deli shop selling upmarket produce and speciality coffee for take-away.\n'
                     'Very friendly and helpful staff, this is a Penge gem',
@@ -90,7 +83,7 @@ def populate_cafes(apps, schema_editor):
 
     four_boroughs = 'Four Boroughs'
     Cafe(
-        contributor=User.objects.get(username='Nancy'),
+        contributor=User.objects.get(username='Judy'),
         name=four_boroughs,
         description='Situated in a beautiful newly renovated courtyard\n'
                     'Lots of outdoor seating available away from traffic and noise',

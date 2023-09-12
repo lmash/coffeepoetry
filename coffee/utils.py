@@ -50,8 +50,8 @@ def add_cafe_for_poetry_generation(cafe):
 
 
 def cafe_eligible(cafe) -> bool:
-    """A café is only eligible if it has 3 or more CoffeeDescription rows"""
-    return CoffeeDescription.objects.filter(cafe=cafe.pk).count() >= 3
+    """A café is only eligible if it has 3 or more CoffeeDescription rows and a rating of 4 or more"""
+    return CoffeeDescription.objects.filter(cafe=cafe.pk).count() >= 3 and cafe.rating >= 4
 
 
 def get_random_coffee_descriptions(cafe) -> str:

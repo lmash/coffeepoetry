@@ -13,7 +13,7 @@ from .forms import CafeForm
 from coffee import utils
 
 
-class HomeView(ListView):
+class CoffeePoetryView(ListView):
     model = Cafe
     template_name = "coffee/index.html"
 

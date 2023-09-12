@@ -8,8 +8,14 @@ based on the café and coffee descriptions provided.
 - Only cafés with an average rating of 4 or higher and 3 or more review descriptions can generate poetry
 - The AI uses a combination of the café and coffee descriptions (3 coffee descriptions are randomly selected) to generate a haiku
 
-## Technologies
-HTML, Bootstrap, CSS, Javascript, Python, Django Framework, OpenAI
+## Tech Stack
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
+![ChatGPT](https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white)
 
 ### Setup Pre-Requisite
 To enable poetry generation requires an API key from OpenAI. The website will work without the key
@@ -50,17 +56,14 @@ pip install -r requirements.txt
 ## Run
 `python manage.py runserver`
 
-## Distinctiveness and Complexity
+### Distinctiveness and Complexity
 The website is distinctive as it's main use is to review and advertise speciality cafès.
 This is done using a traditional review system, along with a creative component - the Poetry generation 
 part of the website which is there to encourage users to return and review frequently, and is only available for highly rated 
 cafès.
 
-The complexity comes from incorporating the review system along with the AI generation of a poem which will be 
-refreshed every time a cafè (which qualifies) coffee description changes. The project also uses testing more than any of the 
-previous projects - could put more here depending on test coverage obtained (perhaps a coverage html report?) 
-Images - Allow the uploading of multiple images. For additional complexity the site has been deployed and is available at www.?????.??? 
-Migrations also include data migrations as initial data.
+The complexity comes from incorporating the review system along with the AI generation of poems. 
+The website has been deployed and is available at: www.????
 
 ### Page Descriptions
 ## Register
@@ -98,46 +101,47 @@ A Poems link can also be clicked to display all poems.
 ## Poems
 Displays all poems generated for a cafe, along with their inspiration and date created. Ordered by most recently created.
 
-## Description of files
+### Description of files
 
 Non-Python files:
 
-| filename             | description                                                                                                                                                               |
-|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| README.md            | Text file (markdown format) description of the project.                                                                                                                   |
-| requirements.txt     | Text file of packages to be installed by pip.                                                                                                                             |
-| .env.example         | Text file for API keys to be populated and renamed.                                                                                                                       |
-| coffee/cafe.js       | Javascript file. Contains most of the review and edit logic. Updates stars and ratings and re displays them after saving. <br/>Displays changed description after saving. |
-| coffee/styles.css    | Css file with shared styling for the project.                                                                                                                             |
-| coffee/validation.js | Javascript file to apply form validation                                                                                                                                  |
+| filename                            | description                                                                                                                                                               |
+|-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| README.md                           | Text file (markdown format) description of the project.                                                                                                                   |
+| requirements.txt                    | Text file of packages to be installed by pip.                                                                                                                             |
+| .env.example                        | Text file for API keys to be populated and renamed.                                                                                                                       |
+| coffee/static/coffee/cafe.js        | Javascript file. Contains most of the review and edit logic. Updates stars and ratings and re displays them after saving. <br/>Displays changed description after saving. |
+| coffee/static/coffee/list_cafes.js  | Javascript file. Enables bootstrap tooltips.                                                                                                                              |
+| coffee/static/coffee/styles.css     | Css file with shared styling for the project.                                                                                                                             |
+| coffee/static/coffee/validation.js  | Javascript file to apply form validation                                                                                                                                  |
 
 HTML files in the templates/coffee folder:
 
-| filename                        | description                                                                                                                          |
-|---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| cafe.html                       | Displays a single cafe. All pictures of the cafè are shown via a carousel. A cafès details can be edited and a cafè can be reviewed. |
-| index.html                      | Displays all cafè's to all users. Allows a cafè to be selected.                                                                      |
-| layout.html                     | Shared structure for the project. Loads css styling and javascript. Contains the NavBar.                                             |
-| login.html                      | Displays login page when "Log In" selected from the NavBar.                                                                          |
-| my_cafes.html                   | Displays logged in users cafè's when "<User>'s Cafès" selected from the NavBar. Allows a cafè to be selected.                        |
-| new.html                        | Allows the creation of a new cafè when "New" selected from the NavBar. Only visible if user logged in.                               |
-| poetry.html                     | T.B.C. when "Poetry" selected from the NavBar. Only visible if user logged in.                                                       |
-| register.html                   | Displays create new user page when "Register" selected from the NavBar.                                                              |
-| includes/list_display_card.html | Card to display a cafè details with a photo. Used in index.html and my_cafes.html                                                    |
-| includes/review.html            | Allow user to review a cafè. Used in cafe.html                                                                                       |
-| includes/star_rating.html       | Display star rating. Used in cafe.html                                                                                               |
+| filename                        | description                                                                                                                                                               |
+|---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| cafe.html                       | Displays a single cafe. All pictures of the cafè are shown via a carousel. A cafès details can be edited, a cafè can be reviewed and there is a link to historical poems. |
+| index.html                      | Displays all cafè's to all users. Allows a cafè to be selected.                                                                                                           |
+| layout.html                     | Shared structure for the project. Loads css styling and javascript. Contains the NavBar.                                                                                  |
+| login.html                      | Displays login page when "Log In" selected from the NavBar.                                                                                                               |
+| my_cafes.html                   | Displays logged in users cafè's when "<User>'s Cafès" selected from the NavBar. Allows a cafè to be selected.                                                             |
+| new.html                        | Allows the creation of a new cafè when "New" selected from the NavBar. Only visible if user logged in.                                                                    |
+| poetry.html                     | Displays historical poems for a cafe.                                                                                                                                     |
+| register.html                   | Displays create new user page when "Register" selected from the NavBar.                                                                                                   |
+| includes/list_display_card.html | Card to display a cafè details with a photo. Used in index.html and my_cafes.html                                                                                         |
+| includes/poem_display_card.html | Card to display a haiku, its inspiration and its date created. Used in poetry.html                                                                                        |
+| includes/review.html            | Allow user to review a cafè. Used in cafe.html                                                                                                                            |
+| includes/star_rating.html       | Display star rating. Used in cafe.html                                                                                                                                    |
 
 Python modules:
 
-| filename  | description                                                                                      |
-|-----------|--------------------------------------------------------------------------------------------------|
-| admin.py  | Classes for Model Administration. Entries allow  models to be updated via django admin           |
-| ai.py     | ???                                                                                              |
-| apps.py   | ???                                                                                              |
-| config.py | ???                                                                                              |
-| forms.py  | Classes for form entry                                                                           |
-| models.py | Model Classes. Has entries for the following models: User, Cafe, Image, Review, Adjective & Poem |
-| urls.py   | ???                                                                                              |
-| utils.py  | Classes for Model Administration. Entries allow  models to be updated via django admin           |
-| views.py  | ???                                                                                              |
+| filename  | description                                                                                                                                                                                                     |
+|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| admin.py  | Classes for Model Administration. Entries allow models to be updated via django admin                                                                                                                           |
+| ai.py     | Functions for interacting with openai, and cleaning content received                                                                                                                                            |
+| apps.py   | Standard AppConfig class for application                                                                                                                                                                        |
+| forms.py  | Classes for form entry                                                                                                                                                                                          |
+| models.py | Model Classes. Has entries for the following models: User, Cafe, Image, Review, CoffeeDescription & Poem                                                                                                        |
+| urls.py   | Url routes for all views                                                                                                                                                                                        |
+| utils.py  | Utility functions called by views                                                                                                                                                                               |
+| views.py  | Views rendering html templates CoffeePoetryView, MyCafesView , cafe_view , new_cafe , login_view, logout_view, register, poetry_view <br/> and views returning json: rating_view, haiku_view,  save_edited_view |
 
