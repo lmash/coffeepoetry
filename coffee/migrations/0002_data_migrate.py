@@ -23,7 +23,7 @@ def populate_cafes(apps, schema_editor):
     Cafe(
         contributor=User.objects.get(username='Judy'),
         name=no_41_coffee,
-        description='Trendy and newly refurbished\nFriendly atmosphere',
+        description='Trendy and newly refurbished.\nFriendly atmosphere.',
         location='Forest Hill'
     ).save()
 
@@ -41,9 +41,9 @@ def populate_cafes(apps, schema_editor):
     Cafe(
         contributor=User.objects.get(username='Judy'),
         name=alexandra_nurseries,
-        description='Romantic garden centre with outdoor seating amongst the plants and shrubs\n'
-                    'Friendly family run business\n'
-                    'In winter there is a Christmas market and burger nights with mulled wine on several evenings',
+        description='Romantic garden centre with outdoor seating amongst the plants and shrubs.\n'
+                    'Friendly family run business.\n'
+                    'In winter there is a Christmas market and burger nights with mulled wine on several evenings.',
         location='Sydenham'
     ).save()
 
@@ -82,7 +82,7 @@ def populate_cafes(apps, schema_editor):
         contributor=User.objects.get(username='Judy'),
         name=penge_general,
         description='Trendy deli shop selling upmarket produce and speciality coffee for take-away.\n'
-                    'Very friendly and helpful staff, this is a Penge gem',
+                    'Very friendly and helpful staff, this is a Penge gem.',
         location='Penge'
     ).save()
 
@@ -110,8 +110,8 @@ def populate_cafes(apps, schema_editor):
     Cafe(
         contributor=User.objects.get(username='Judy'),
         name=four_boroughs,
-        description='Situated in a beautiful newly renovated courtyard\n'
-                    'Lots of outdoor seating available away from traffic and noise',
+        description='Situated in a beautiful newly renovated courtyard.\n'
+                    'Lots of outdoor seating available away from traffic and noise.',
         location='Loughborough Junction'
     ).save()
 

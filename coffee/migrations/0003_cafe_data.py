@@ -12,9 +12,9 @@ def populate_cafes(apps, schema_editor):
     Cafe(
         contributor=User.objects.get(username='Judy'),
         name=kaffeine,
-        description='Open since 2009 and still regarded as a leading benchmark setting cafe'
-                    'of the London speciality coffee industry\n'
-                    'Located in the beating heart of Fitzrovia, just three minutes from Oxford Circus',
+        description='Open since 2009 and still regarded as a leading benchmark setting cafe '
+                    'of the London speciality coffee industry.\n'
+                    'Located in the beating heart of Fitzrovia, just three minutes from Oxford Circus.',
         location='London City'
     ).save()
 

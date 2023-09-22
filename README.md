@@ -79,7 +79,7 @@ User must enter username and password to login (once they've registered). Has va
 username and password entered match an existing account.
 
 ## CoffeePoetry
-Displays all cafe's ordered by review score, with the highest appearing first. Anyone (logged in/not) can see the same detail.
+Displays all cafés ordered by review score, with the highest appearing first. Anyone (logged in/not) can see the same detail.
 Shows the first image loaded against a café, the café name, location and a haiku and it's inspiration if one has been generated. Hover over inspiration to see.
 Clicking on a cafés name displays the cafés page.
 
@@ -89,11 +89,11 @@ Clicking on a cafés name displays the cafés page.
 
 ## New Cafe
 Allows a logged in user to create a café. Name, location, description and at least one image are mandatory.
-The first image added will be displayed on all list pages for the cafe.
+The first image added will be displayed on all list pages for the café.
 
 ## Café
-Displays a single cafe with a carousel of images, cafe name, location, description and rating.
-Users logged in can review a cafe by clicking the Review button. The user who created the Café
+Displays a single café with a carousel of images, café name, location, description and rating.
+Users logged in can review a café by clicking the Review button. The user who created the Café
 can edit the description and add more images.
 
 Clicking on the Review button displays a review window, the user can then rate the café using 5 criteria.
@@ -103,7 +103,7 @@ and the poem is refreshed. Hovering over the star rating will display the numeri
 A Poems link can also be clicked to display all poems.
 
 ## Poems
-Displays all poems generated for a cafe, along with their inspiration and date created. Ordered by most recently created.
+Displays all poems generated for a café, along with their inspiration and date created. Ordered by most recently created.
 
 ### Description of files
 
@@ -123,13 +123,13 @@ HTML files in the templates/coffee folder:
 
 | filename                        | description                                                                                                                                                               |
 |---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| cafe.html                       | Displays a single cafe. All pictures of the cafè are shown via a carousel. A cafès details can be edited, a cafè can be reviewed and there is a link to historical poems. |
+| cafe.html                       | Displays a single café. All pictures of the cafè are shown via a carousel. A cafès details can be edited, a cafè can be reviewed and there is a link to historical poems. |
 | index.html                      | Displays all cafè's to all users. Allows a cafè to be selected.                                                                                                           |
 | layout.html                     | Shared structure for the project. Loads css styling and javascript. Contains the NavBar.                                                                                  |
 | login.html                      | Displays login page when "Log In" selected from the NavBar.                                                                                                               |
 | my_cafes.html                   | Displays logged in users cafè's when "<User>'s Cafès" selected from the NavBar. Allows a cafè to be selected.                                                             |
 | new.html                        | Allows the creation of a new cafè when "New" selected from the NavBar. Only visible if user logged in.                                                                    |
-| poetry.html                     | Displays historical poems for a cafe.                                                                                                                                     |
+| poetry.html                     | Displays historical poems for a café.                                                                                                                                     |
 | register.html                   | Displays create new user page when "Register" selected from the NavBar.                                                                                                   |
 | includes/edit.html              | Modal to edit a cafés description and add additional images. Used in cafe.html                                                                                            |
 | includes/list_display_card.html | Card to display a cafè details with a photo. Used in index.html and my_cafes.html                                                                                         |
