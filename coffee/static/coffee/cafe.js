@@ -44,6 +44,7 @@ function get_rating() {
     .then(response => response.json())
     .then(data => {
         draw_stars(data['rating'])
+        update_rating_tooltip(data['rating'])
     })
     .catch(error => {
         console.log('Error:', error);
@@ -59,6 +60,13 @@ function draw_stars(rating) {
     const starPercentage = (rating / starTotal) * 100;
     const starPercentageRounded = `${(Math.round(starPercentage / 10) * 10)}%`;
     document.querySelector(`.${class_name} .stars-inner`).style.width = starPercentageRounded;
+}
+
+function update_rating_tooltip(rating) {
+    // Update the numeric rating displayed when hovering over stars after the rating changes
+    const numeric_rating = document.getElementById(`numericRatingTooltip`);
+    numeric_rating.setAttribute("data-bs-original-title", rating);
+    console.log(numeric_rating);
 }
 
 function update_stars_text(num_stars, stars_element) {

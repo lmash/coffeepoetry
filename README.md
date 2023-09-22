@@ -62,7 +62,11 @@ This is done using a traditional review system, along with a creative component 
 part of the website which is there to encourage users to return and review frequently, and is only available for highly rated 
 cafès.
 
-The complexity comes from incorporating the review system along with the AI generation of poems. 
+The complexity comes from incorporating the review system and it's rules along with the AI generation of poems.
+A café is reviewed based on 5 criteria, with the overall review updated and redisplayed after each review. 
+The review is displayed using stars and the numeric value can be seen when hovering over the stars. Incorporating the AI
+poem generation required some prompt engineering and combining details of the café and the review description.
+
 The website has been deployed and is available at: www.????
 
 ### Page Descriptions
