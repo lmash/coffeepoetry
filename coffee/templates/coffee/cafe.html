@@ -24,7 +24,8 @@
             <div class="card-body">
                 <div class="flex d-flex justify-content-between">
                     <h5 class="card-title">{{ cafe.name }}</h5>
-                    <span>{% include "coffee/includes/star_rating.html" %}</span>
+                    <span data-bs-toggle="tooltip" data-bs-placement="left"
+                          title="{{ cafe.rating }}">{% include "coffee/includes/star_rating.html" %}</span>
                 </div>
 
                 <p>{{ cafe.location }}</p>
@@ -55,4 +56,5 @@
 </div>
 
 <script src="{% static 'coffee/cafe.js' %}"></script>
+<script src="{% static 'coffee/tooltips.js' %}"></script>
 {% endblock %}

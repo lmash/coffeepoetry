@@ -67,7 +67,7 @@ The website has been deployed and is available at: www.????
 
 ### Page Descriptions
 ## Register
-A page to create new accounts.Has validation to ensure the user being created in unique, 
+A page to create new accounts.Has validation to ensure the user being created is unique, 
 all fields are populated and the passwords entered match.
 
 ## Login
@@ -79,7 +79,7 @@ Displays all cafe's ordered by review score, with the highest appearing first. A
 Shows the first image loaded against a café, the café name, location and a haiku and it's inspiration if one has been generated. Hover over inspiration to see.
 Clicking on a cafés name displays the cafés page.
 
-## <Usernames> Cafés
+## \<User\> Cafés
 Displays all cafés created by the user logged in, ordered by review score, with the highest appearing first. 
 Clicking on a cafés name displays the cafés page.
 
@@ -94,7 +94,7 @@ can edit the description and add more images.
 
 Clicking on the Review button displays a review window, the user can then rate the café using 5 criteria.
 The user can also describe the coffee. After a review is saved the review (stars display) is updated, review criteria are reset 
-and the poem is refreshed.
+and the poem is refreshed. Hovering over the star rating will display the numeric value of the rating.
 
 A Poems link can also be clicked to display all poems.
 
@@ -105,15 +105,15 @@ Displays all poems generated for a cafe, along with their inspiration and date c
 
 Non-Python files:
 
-| filename                            | description                                                                                                                                                               |
-|-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| README.md                           | Text file (markdown format) description of the project.                                                                                                                   |
-| requirements.txt                    | Text file of packages to be installed by pip.                                                                                                                             |
-| .env.example                        | Text file for API keys to be populated and renamed.                                                                                                                       |
-| coffee/static/coffee/cafe.js        | Javascript file. Contains most of the review and edit logic. Updates stars and ratings and re displays them after saving. <br/>Displays changed description after saving. |
-| coffee/static/coffee/list_cafes.js  | Javascript file. Enables bootstrap tooltips.                                                                                                                              |
-| coffee/static/coffee/styles.css     | Css file with shared styling for the project.                                                                                                                             |
-| coffee/static/coffee/validation.js  | Javascript file to apply form validation                                                                                                                                  |
+| filename                           | description                                                                                                                                                               |
+|------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| README.md                          | Text file (markdown format) description of the project.                                                                                                                   |
+| requirements.txt                   | Text file of packages to be installed by pip.                                                                                                                             |
+| .env.example                       | Text file for API keys to be populated and renamed.                                                                                                                       |
+| coffee/static/coffee/cafe.js       | Javascript file. Contains most of the review and edit logic. Updates stars and ratings and re displays them after saving. <br/>Displays changed description after saving. |
+| coffee/static/coffee/styles.css    | Css file with shared styling for the project.                                                                                                                             |
+| coffee/static/coffee/tooltips.js   | Javascript file. Enables bootstrap tooltips.                                                                                                                              |
+| coffee/static/coffee/validation.js | Javascript file to apply form validation                                                                                                                                  |
 
 HTML files in the templates/coffee folder:
 
@@ -127,6 +127,7 @@ HTML files in the templates/coffee folder:
 | new.html                        | Allows the creation of a new cafè when "New" selected from the NavBar. Only visible if user logged in.                                                                    |
 | poetry.html                     | Displays historical poems for a cafe.                                                                                                                                     |
 | register.html                   | Displays create new user page when "Register" selected from the NavBar.                                                                                                   |
+| includes/edit.html              | Modal to edit a cafés description and add additional images. Used in cafe.html                                                                                            |
 | includes/list_display_card.html | Card to display a cafè details with a photo. Used in index.html and my_cafes.html                                                                                         |
 | includes/poem_display_card.html | Card to display a haiku, its inspiration and its date created. Used in poetry.html                                                                                        |
 | includes/review.html            | Allow user to review a cafè. Used in cafe.html                                                                                                                            |
