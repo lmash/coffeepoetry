@@ -1,3 +1,5 @@
+import PIL.Image
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
@@ -49,6 +51,20 @@ class Image(models.Model):
             "cafe_id": self.cafe,
             "name": self.name
         }
+
+    def save(self, *args, **kwargs):
+        """Resize image before saving to reduce space required"""
+        # https://forum.djangoproject.com/t/django-filefield-resize-image-before-save-to-s3botostorage/7595/2
+        super().save(*args, **kwargs)
+        img = PIL.Image.open(self.image)
+        width, height = img.size
+        target_width = 600
+        h_coefficient = width/600
+        target_height = height/h_coefficient
+        img = img.resize((int(target_width), int(target_height)), PIL.Image.ANTIALIAS)
+        img.save(self.image.path, quality=100)
+        img.close()
+        self.image.close()
 
 
 class Review(models.Model):
