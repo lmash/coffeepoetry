@@ -82,8 +82,6 @@ poem generation required some prompt engineering and combining details of the ca
 Unexpected complexity came from images. Allowing a user to load their own, saving them, adding additional images 
 when editing and resizing them to ensure they don't use too much space.
 
-The website has been deployed and is available at: www.????
-
 ### Page Descriptions
 ## Register
 A page to create new accounts.Has validation to ensure the user being created is unique, 
