@@ -23,8 +23,8 @@ def get_haiku(cafe: str, coffee: str) -> str:
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": f"""
             You are a master haiku writer. 
-            Write a haiku about a speciality coffee cafe which is described below. The haiku should be visual and dreamy 
-            with occasional scenic or color references. Never mention prices. 
+            Write a haiku about a speciality coffee cafe which is described below. 
+            The haiku can have occasional dreamy, scenic or color references. Never mention prices. 
 
             Below: {coffee}
 
