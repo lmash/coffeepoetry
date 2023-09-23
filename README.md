@@ -79,6 +79,9 @@ A café is reviewed based on 5 criteria, with the overall review updated and red
 The review is displayed using stars and the numeric value can be seen when hovering over the stars. Incorporating the AI
 poem generation required some prompt engineering and combining details of the café and the review description.
 
+Unexpected complexity came from images. Allowing a user to load their own, saving them, adding additional images 
+when editing and resizing them to ensure they don't use too much space.
+
 The website has been deployed and is available at: www.????
 
 ### Page Descriptions

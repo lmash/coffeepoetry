@@ -1,6 +1,10 @@
+import uuid
 import PIL.Image
+from io import BytesIO
 
 from django.contrib.auth.models import AbstractUser
+from django.core.files import File
+from django.core.files.base import ContentFile
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
@@ -39,7 +43,28 @@ class Cafe(models.Model):
         }
 
 
-class Image(models.Model):
+class ResizeImageMixin:
+    def resize(self, image_field: models.ImageField, target_width: int):
+        """Resize image to reduce space required
+        Amended code from the below source
+        https://dev.to/a1k89/resize-image-before-save-in-django-2b40
+        """
+        im = PIL.Image.open(image_field)  # Catch original
+        source_image = im.convert('RGB')
+        source_image.thumbnail((target_width, target_width), PIL.Image.LANCZOS)  # Resize in place
+
+        output = BytesIO()
+        source_image.save(output, format='JPEG')  # Save resize image to bytes
+        output.seek(0)
+
+        content_file = ContentFile(output.read())  # Read output and create ContentFile in memory
+        file = File(content_file)
+
+        random_name = f'{self.name.name.split(".")[0]}_{uuid.uuid4()}.jpeg'
+        image_field.save(random_name, file, save=False)
+
+
+class Image(models.Model, ResizeImageMixin):
     cafe = models.ForeignKey(Cafe, default=None, on_delete=models.CASCADE)
     name = models.ImageField(upload_to='images/', verbose_name='Image')
 
@@ -54,17 +79,8 @@ class Image(models.Model):
 
     def save(self, *args, **kwargs):
         """Resize image before saving to reduce space required"""
-        # https://forum.djangoproject.com/t/django-filefield-resize-image-before-save-to-s3botostorage/7595/2
+        self.resize(self.name, target_width=2000)
         super().save(*args, **kwargs)
-        img = PIL.Image.open(self.image)
-        width, height = img.size
-        target_width = 600
-        h_coefficient = width/600
-        target_height = height/h_coefficient
-        img = img.resize((int(target_width), int(target_height)), PIL.Image.ANTIALIAS)
-        img.save(self.image.path, quality=100)
-        img.close()
-        self.image.close()
 
 
 class Review(models.Model):
