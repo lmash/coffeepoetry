@@ -122,7 +122,7 @@ def populate_cafes(apps, schema_editor):
 
     Image(
         cafe=Cafe.objects.get(name=four_boroughs),
-        name='images/IMG_3551_shopfront.jpeg'
+        name='images/IMG_3551.jpeg'
     ).save()
 
 

@@ -31,14 +31,15 @@ To get an OpenAI API Key
 1. Clone the repo and then change folder
 
 ```sh
-git clone https://github.com/?????
+git clone git@github.com:me50/lmash.git
 cd lmash
 ```
 
-2. Create a virtual environment 
+2. Create a virtual environment and activate it 
 
 ```sh
-python -m venv myenv
+python -m venv venv
+source venv/bin/activate
 ```
 
 3. Install required packages
@@ -47,18 +48,29 @@ python -m venv myenv
 pip install -r requirements.txt
 ```
 
+4. Create the Database
+```shell
+python manage.py migrate
+```
+
 ### One time poetry generation setup
-1. Copy file: coffee/.env.example to coffee/.env
+1. Copy file for API key
+```shell
+cp coffee/.env.example coffee/.env
+```
+
 2. Open .env and paste the OpenAI key noted after 
 `OPENAI_API_KEY=`
 3. Save and close .env file
 
 ## Run
-`python manage.py runserver`
+```shell
+python manage.py runserver
+```
 
 ### Distinctiveness and Complexity
 The website is distinctive as it's main use is to review and advertise speciality cafès.
-This is done using a traditional review system, along with a creative component - the Poetry generation 
+This is done using a traditional review system, along with a creative component - the poetry generation 
 part of the website which is there to encourage users to return and review frequently, and is only available for highly rated 
 cafès.
 
