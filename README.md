@@ -68,6 +68,11 @@ cp coffee/.env.example coffee/.env
 python manage.py runserver
 ```
 
+## Run Unit Tests
+```shell
+python manage.py test
+```
+
 ### Distinctiveness and Complexity
 The website is distinctive as it's main use is to review and advertise speciality cafès.
 This is done using a traditional review system, along with a creative component - the poetry generation 
@@ -106,14 +111,20 @@ The first image added will be displayed on all list pages for the café.
 
 ## Café
 Displays a single café with a carousel of images, café name, location, description and rating.
-Users logged in can review a café by clicking the Review button. The user who created the Café
-can edit the description and add more images.
+
+Also visible are
+   - A link to display all historical poems 
+   - A Review button for users logged in
+   - An Edit button only for the user who created the cafe
+
+
+The latest poem generated for the café is displayed at the bottom
+
+Clicking on the Edit button displays an edit window, the user can edit the café description and add additional images.
 
 Clicking on the Review button displays a review window, the user can then rate the café using 5 criteria.
 The user can also describe the coffee. After a review is saved the review (stars display) is updated, review criteria are reset 
 and the poem is refreshed. Hovering over the star rating will display the numeric value of the rating.
-
-A Poems link can also be clicked to display all poems.
 
 ## Poems
 Displays all poems generated for a café, along with their inspiration and date created. Ordered by most recently created.
@@ -152,14 +163,18 @@ HTML files in the templates/coffee folder:
 
 Python modules:
 
-| filename  | description                                                                                                                                                                                                     |
-|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| admin.py  | Classes for Model Administration. Entries allow models to be updated via django admin                                                                                                                           |
-| ai.py     | Functions for interacting with openai, and cleaning content received                                                                                                                                            |
-| apps.py   | Standard AppConfig class for application                                                                                                                                                                        |
-| forms.py  | Classes for form entry                                                                                                                                                                                          |
-| models.py | Model Classes. Has entries for the following models: User, Cafe, Image, Review, CoffeeDescription & Poem                                                                                                        |
-| urls.py   | Url routes for all views                                                                                                                                                                                        |
-| utils.py  | Utility functions called by views                                                                                                                                                                               |
-| views.py  | Views rendering html templates CoffeePoetryView, MyCafesView , cafe_view , new_cafe , login_view, logout_view, register, poetry_view <br/> and views returning json: rating_view, haiku_view,  save_edited_view |
+| filename             | description                                                                                                                                                                                                     |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| admin.py             | Classes for Model Administration. Entries allow models to be updated via django admin                                                                                                                           |
+| ai.py                | Functions for interacting with openai, and cleaning content received                                                                                                                                            |
+| apps.py              | Standard AppConfig class for application                                                                                                                                                                        |
+| forms.py             | Classes for form entry                                                                                                                                                                                          |
+| models.py            | Model Classes. Has entries for the following models: User, Cafe, Image, Review, CoffeeDescription & Poem                                                                                                        |
+| urls.py              | Url routes for all views                                                                                                                                                                                        |
+| utils.py             | Utility functions called by views                                                                                                                                                                               |
+| views.py             | Views rendering html templates CoffeePoetryView, MyCafesView , cafe_view , new_cafe , login_view, logout_view, register, poetry_view <br/> and views returning json: rating_view, haiku_view,  save_edited_view |
+| tests/test_models.py | Unit tests for Cafe and User models                                                                                                                                                                             |
+| tests/test_utils.py  | Unit tests for functions cafe_eligible, reduce_content and get_random_coffee_descriptions                                                                                                                       |
+| tests/test_views.py  | Unit tests for views LoginView and IndexView                                                                                                                                                                    |
+
 
