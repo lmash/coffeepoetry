@@ -4,7 +4,7 @@
 <div class="card mb-3 text-left border-2">
     <div class="row no-gutters">
             <div class="col-md-4">
-                <img class="card-img" src="{{ MEDIA_PREFIX }}{{ cafe.first_photo }}" alt="Cafe image">
+                <a href="{% url 'cafe' cafe.pk %}"><img class="card-img" src="{{ MEDIA_PREFIX }}{{ cafe.first_photo }}" alt="Cafe image"></a>
             </div>
 
             <div class="col-md-4 d-flex align-items-center">

@@ -53,15 +53,29 @@ pip install -r requirements.txt
 python manage.py migrate
 ```
 
-### One time poetry generation setup
-1. Copy file for API key
+### One time django SECRET_KEY generation
+Run the below and note key returned
 ```shell
-cp coffee/.env.example coffee/.env
+python3 -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
+```
+
+### One time environment variable setup
+1. Copy file for environment variables
+```shell
+cp .env.example .env
 ```
 
 2. Open .env and paste the OpenAI key noted after 
-`OPENAI_API_KEY=`
-3. Save and close .env file
+```shell
+OPENAI_API_KEY=
+```
+
+3. Paste the django SECRET_KEY noted after 
+```shell
+SECRET_KEY=
+```
+
+4. Save and close .env file
 
 ## Run
 ```shell
@@ -177,4 +191,6 @@ Python modules:
 | tests/test_utils.py  | Unit tests for functions cafe_eligible, reduce_content and get_random_coffee_descriptions                                                                                                                       |
 | tests/test_views.py  | Unit tests for views LoginView and IndexView                                                                                                                                                                    |
 
-
+### Limitations (areas to improve)
+  - Currently the app does not accept .HEIC (mac) format images
+  - It's recommended to add images which are horizontally shot (Vertical images will be prevented in next release)
